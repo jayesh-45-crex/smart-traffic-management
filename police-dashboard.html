@@ -1,0 +1,1832 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Nagpur AI | Police Command Center</title>
+
+<link rel="stylesheet"
+href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#050d18;
+    color:white;
+}
+
+/* HEADER */
+
+header{
+    height:70px;
+    padding:0 25px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    background:#081727;
+
+    border-bottom:1px solid #193750;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo{
+    width:45px;
+    height:45px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:#092b40;
+
+    border:1px solid #00d9ff;
+
+    border-radius:12px;
+
+    font-size:23px;
+}
+
+.brand h1{
+    font-size:20px;
+}
+
+.brand h1 span{
+    color:#00d9ff;
+}
+
+.brand small{
+    color:#718499;
+    font-size:9px;
+    letter-spacing:2px;
+}
+
+.operator{
+    display:flex;
+    align-items:center;
+    gap:15px;
+
+    font-size:12px;
+    color:#9eafc0;
+}
+
+.online{
+    color:#00f59b;
+}
+
+.logout{
+    background:#d63031;
+    color:white;
+
+    border:0;
+    border-radius:7px;
+
+    padding:9px 15px;
+
+    cursor:pointer;
+}
+
+
+/* MAIN */
+
+.container{
+    padding:25px;
+}
+
+.title h2{
+    font-size:25px;
+}
+
+.title p{
+    margin-top:5px;
+    color:#75879a;
+    font-size:13px;
+}
+
+
+/* STATS */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+
+    gap:15px;
+
+    margin-top:20px;
+    margin-bottom:20px;
+}
+
+.stat{
+    padding:17px;
+
+    background:#0a1b2e;
+
+    border:1px solid #193750;
+
+    border-radius:12px;
+}
+
+.stat strong{
+    display:block;
+
+    margin-top:8px;
+
+    color:#00d9ff;
+
+    font-size:25px;
+}
+
+.stat small{
+    color:#8193a6;
+}
+
+
+/* EMERGENCY ALERT */
+
+.emergency-alert{
+
+    display:none;
+
+    margin-bottom:20px;
+
+    padding:18px;
+
+    border-radius:12px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255,45,45,.14),
+            rgba(255,45,45,.04)
+        );
+
+    border:
+        1px solid rgba(255,65,65,.5);
+
+    border-left:
+        5px solid #ff3d3d;
+
+    animation:alertPulse 1.5s infinite;
+}
+
+@keyframes alertPulse{
+
+    0%{
+        box-shadow:0 0 0 rgba(255,50,50,0);
+    }
+
+    50%{
+        box-shadow:
+        0 0 25px rgba(255,50,50,.18);
+    }
+
+    100%{
+        box-shadow:0 0 0 rgba(255,50,50,0);
+    }
+
+}
+
+.alert-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+}
+
+.alert-title{
+
+    color:#ff5555;
+
+    font-size:17px;
+
+    font-weight:bold;
+}
+
+.new-badge{
+
+    background:#ff3434;
+
+    padding:5px 10px;
+
+    border-radius:5px;
+
+    font-size:10px;
+
+    font-weight:bold;
+}
+
+.alert-info{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr 1fr;
+
+    gap:12px;
+
+    margin-top:15px;
+}
+
+.alert-box{
+
+    padding:12px;
+
+    background:#071522;
+
+    border-radius:8px;
+
+    font-size:12px;
+
+    color:#9fb0c0;
+}
+
+.alert-box strong{
+
+    display:block;
+
+    color:white;
+
+    margin-top:5px;
+
+}
+
+.ai-recommendation{
+
+    margin-top:15px;
+
+    padding:13px;
+
+    background:
+        rgba(0,217,255,.07);
+
+    border:
+        1px solid rgba(0,217,255,.2);
+
+    border-radius:8px;
+
+    color:#a9bdcc;
+
+    font-size:12px;
+
+    line-height:1.6;
+}
+
+.alert-actions{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-top:15px;
+}
+
+.accept-btn{
+
+    background:#008f68;
+
+    color:white;
+
+    border:0;
+
+    padding:10px 18px;
+
+    border-radius:7px;
+
+    cursor:pointer;
+}
+
+.dismiss-btn{
+
+    background:#26394b;
+
+    color:white;
+
+    border:0;
+
+    padding:10px 18px;
+
+    border-radius:7px;
+
+    cursor:pointer;
+}
+
+
+/* MAIN GRID */
+
+.main-grid{
+
+    display:grid;
+
+    grid-template-columns:2.2fr 1fr;
+
+    gap:18px;
+}
+
+.map-card{
+
+    background:#081727;
+
+    border:1px solid #193750;
+
+    border-radius:14px;
+
+    overflow:hidden;
+}
+
+.map-header{
+
+    padding:15px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+}
+
+.map-header h3{
+    font-size:16px;
+}
+
+.search{
+
+    display:flex;
+
+    gap:7px;
+}
+
+.search input{
+
+    width:170px;
+
+    padding:8px;
+
+    background:#061321;
+
+    color:white;
+
+    border:1px solid #29465e;
+
+    border-radius:6px;
+
+    outline:none;
+}
+
+.search button{
+
+    padding:8px 12px;
+
+    background:#007db8;
+
+    color:white;
+
+    border:0;
+
+    border-radius:6px;
+
+    cursor:pointer;
+}
+
+#map{
+
+    height:520px;
+
+    width:100%;
+}
+
+
+/* SIDE */
+
+.side{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+}
+
+.panel{
+
+    background:#081727;
+
+    border:1px solid #193750;
+
+    border-radius:13px;
+
+    padding:17px;
+}
+
+.panel h3{
+
+    font-size:15px;
+
+    margin-bottom:13px;
+}
+
+
+/* AI */
+
+.ai{
+
+    border-left:4px solid #00d9ff;
+}
+
+.ai p{
+
+    color:#9eafc0;
+
+    font-size:12px;
+
+    line-height:1.7;
+}
+
+
+/* CAMERAS */
+
+.camera{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    padding:10px 0;
+
+    border-bottom:1px solid #172c40;
+
+    font-size:12px;
+}
+
+.camera:last-child{
+    border-bottom:0;
+}
+
+.camera small{
+
+    display:block;
+
+    color:#718499;
+
+    margin-top:4px;
+}
+
+.high{
+    color:#ff4d4d;
+}
+
+.medium{
+    color:#ffb52e;
+}
+
+.low{
+    color:#00f59b;
+}
+
+
+/* EVENT */
+
+.event{
+
+    border-left:4px solid #ffb52e;
+}
+
+.event p{
+
+    color:#9eafc0;
+
+    font-size:12px;
+
+    line-height:1.7;
+}
+
+
+/* RESPONSIVE */
+
+@media(max-width:950px){
+
+    .stats{
+
+        grid-template-columns:
+        repeat(2,1fr);
+
+    }
+
+    .main-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+@media(max-width:600px){
+
+    .stats{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .alert-info{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .operator span{
+
+        display:none;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<header>
+
+<div class="brand">
+
+<div class="logo">
+🚦
+</div>
+
+<div>
+
+<h1>
+NAGPUR <span>AI</span>
+</h1>
+
+<small>
+TRAFFIC COMMAND CENTER
+</small>
+
+</div>
+
+</div>
+
+
+<div class="operator">
+
+<span class="online">
+● SYSTEM LIVE
+</span>
+
+👮 Traffic Police
+
+<button
+class="logout"
+onclick="logout()">
+
+Logout
+
+</button>
+
+</div>
+
+</header>
+
+
+
+<div class="container">
+
+
+<div class="title">
+
+<h2>
+Police Command Center
+</h2>
+
+<p>
+AI-assisted traffic monitoring,
+emergency response and city intelligence
+</p>
+
+</div>
+
+
+
+<!-- ================= EMERGENCY ================= -->
+
+<div
+id="emergencyAlert"
+class="emergency-alert">
+
+<div class="alert-top">
+
+<div class="alert-title">
+🚨 NEW EMERGENCY REQUEST
+</div>
+
+<div class="new-badge">
+LIVE ALERT
+</div>
+
+</div>
+
+
+<div class="alert-info">
+
+
+<div class="alert-box">
+
+📍 FROM
+
+<strong id="alertFrom">
+-
+</strong>
+
+</div>
+
+
+<div class="alert-box">
+
+🎯 DESTINATION
+
+<strong id="alertTo">
+-
+</strong>
+
+</div>
+
+
+<div class="alert-box">
+
+🆔 REQUEST ID
+
+<strong id="alertID">
+-
+</strong>
+
+</div>
+
+</div>
+
+
+<div class="ai-recommendation">
+
+🤖 <b>AI Recommendation</b>
+
+<br>
+
+Emergency corridor identified.
+
+Maintain clear movement from
+
+<b id="routeText">
+-
+</b>
+
+and prioritize the emergency route.
+
+<br><br>
+
+Suggested action:
+
+<b>
+Monitor junctions and coordinate
+traffic priority.
+</b>
+
+</div>
+
+
+<div class="alert-actions">
+
+<button
+class="accept-btn"
+onclick="acceptEmergency()">
+
+✓ ACCEPT & PRIORITIZE
+
+</button>
+
+
+<button
+class="dismiss-btn"
+onclick="dismissEmergency()">
+
+Dismiss
+
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- ================= STATS ================= -->
+
+<div class="stats">
+
+
+<div class="stat">
+
+🚗 Vehicles Detected
+
+<strong id="vehicles">
+1,248
+</strong>
+
+<small>
+AI Computer Vision
+</small>
+
+</div>
+
+
+<div class="stat">
+
+📷 Cameras Online
+
+<strong>
+24
+</strong>
+
+<small>
+City Network
+</small>
+
+</div>
+
+
+<div class="stat">
+
+🔴 High Traffic
+
+<strong>
+07
+</strong>
+
+<small>
+Requires attention
+</small>
+
+</div>
+
+
+<div class="stat">
+
+🚨 Active Alerts
+
+<strong id="alertCount">
+00
+</strong>
+
+<small>
+Emergency events
+</small>
+
+</div>
+
+</div>
+
+
+
+<!-- ================= MAIN GRID ================= -->
+
+<div class="main-grid">
+
+
+<!-- MAP -->
+
+<div class="map-card">
+
+<div class="map-header">
+
+<h3>
+🗺️ Nagpur Live Traffic Network
+</h3>
+
+
+<div class="search">
+
+<input
+id="searchInput"
+placeholder="Search location">
+
+<button
+onclick="searchLocation()">
+
+Search
+
+</button>
+
+</div>
+
+</div>
+
+
+<div id="map"></div>
+
+</div>
+
+
+
+<!-- SIDE -->
+
+<div class="side">
+
+
+<!-- AI -->
+
+<div class="panel ai">
+
+<h3>
+🤖 AI Traffic Intelligence
+</h3>
+
+<p>
+
+The AI layer analyses traffic
+density and emergency requests.
+
+<br><br>
+
+Current recommendation:
+
+<b>
+Keep high-density corridors
+under observation.
+</b>
+<a href="ai-traffic.html"
+   style="
+       display:inline-block;
+       margin-top:15px;
+       padding:10px 15px;
+       background:#087fa8;
+       color:white;
+       text-decoration:none;
+       border-radius:7px;
+       font-size:11px;
+       font-weight:bold;
+   ">
+    🤖 Open AI Traffic
+</a>
+
+<br><br>
+
+If an emergency is active,
+prioritize the requested corridor.
+
+</p>
+
+</div>
+
+
+
+<!-- CAMERA -->
+
+<div class="panel">
+
+<h3>
+📷 Camera Network
+</h3>
+
+
+<div class="camera">
+
+<div>
+CAM-001
+<small>Zero Mile</small>
+</div>
+
+<span class="low">
+● LIVE
+</span>
+
+</div>
+
+
+<div class="camera">
+
+<div>
+CAM-002
+<small>Manewada Chowk</small>
+</div>
+
+<span class="high">
+● HIGH
+</span>
+
+</div>
+
+
+<div class="camera">
+
+<div>
+CAM-003
+<small>Chhatrapati Square</small>
+</div>
+
+<span class="high">
+● HIGH
+</span>
+
+</div>
+
+
+<div class="camera">
+
+<div>
+CAM-004
+<small>Medical Square</small>
+</div>
+
+<span class="medium">
+● MEDIUM
+</span>
+
+</div>
+
+
+<div class="camera">
+
+<div>
+CAM-005
+<small>Ajni Chowk</small>
+</div>
+
+<span class="high">
+● HIGH
+</span>
+
+</div>
+
+</div>
+
+
+
+<!-- EVENT -->
+
+<div class="panel event">
+
+<h3>
+🏟️ Event / Rally Mode
+</h3>
+<a href="rally-mode.html"
+   style="
+       display:inline-block;
+       margin-top:12px;
+       padding:10px 15px;
+       background:#a86a08;
+       color:white;
+       text-decoration:none;
+       border-radius:7px;
+       font-size:11px;
+       font-weight:bold;
+   ">
+    🏟️ Open Event Mode
+</a>
+<p>
+
+Central Nagpur event monitoring.
+
+<br><br>
+
+Affected corridor:
+
+<b>
+Zero Mile → Variety Square
+</b>
+
+<br><br>
+
+⚠ Monitor congestion
+
+<br>
+
+⚠ Prepare diversion
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<script
+src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+
+
+<script>
+
+/* =====================================
+   MAP
+===================================== */
+
+const map =
+L.map("map")
+.setView(
+[21.1458,79.0882],
+12
+);
+
+
+L.tileLayer(
+"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+{
+attribution:
+"&copy; OpenStreetMap contributors"
+}
+).addTo(map);
+
+
+
+/* =====================================
+   JUNCTIONS
+===================================== */
+
+const junctions=[
+
+{
+name:"Zero Mile",
+lat:21.1458,
+lng:79.0882,
+status:"LOW",
+camera:"CAM-001"
+},
+
+{
+name:"Manewada Chowk",
+lat:21.1137,
+lng:79.1072,
+status:"HIGH",
+camera:"CAM-002"
+},
+
+{
+name:"Chhatrapati Square",
+lat:21.1105,
+lng:79.0848,
+status:"HIGH",
+camera:"CAM-003"
+},
+
+{
+name:"Medical Square",
+lat:21.1267,
+lng:79.0858,
+status:"MEDIUM",
+camera:"CAM-004"
+},
+
+{
+name:"Ajni Chowk",
+lat:21.1195,
+lng:79.0780,
+status:"HIGH",
+camera:"CAM-005"
+},
+
+{
+name:"RBI Square",
+lat:21.1506,
+lng:79.0802,
+status:"MEDIUM",
+camera:"CAM-006"
+},
+
+{
+name:"Variety Square",
+lat:21.1453,
+lng:79.0849,
+status:"MEDIUM",
+camera:"CAM-007"
+}
+
+];
+
+
+
+/* =====================================
+   MARKERS
+===================================== */
+
+junctions.forEach(function(j){
+
+let color="#00f59b";
+
+if(j.status==="HIGH")
+color="#ff4141";
+
+if(j.status==="MEDIUM")
+color="#ffb52e";
+
+
+const icon=L.divIcon({
+
+className:"",
+
+html:
+`<div style="
+width:18px;
+height:18px;
+border-radius:50%;
+background:${color};
+border:3px solid white;
+box-shadow:0 0 15px ${color};
+"></div>`,
+
+iconSize:[18,18],
+
+iconAnchor:[9,9]
+
+});
+
+
+const marker=
+L.marker(
+[j.lat,j.lng],
+{icon:icon}
+)
+.addTo(map);
+
+
+marker.bindPopup(`
+
+<b>${j.name}</b>
+
+<br><br>
+
+📷 ${j.camera}
+
+<br>
+
+🚦 Traffic:
+<b>${j.status}</b>
+
+`);
+
+});
+
+
+
+/* =====================================
+   EMERGENCY ROUTE
+===================================== */
+
+let emergencyLine=null;
+
+
+/* =====================================
+   CHECK EMERGENCY
+===================================== */
+
+function checkEmergency(){
+    function acceptEmergency() {
+
+    const data = localStorage.getItem("nagpurEmergency");
+
+    if (!data) {
+        alert("No active emergency request found.");
+        return;
+    }
+
+    const emergency = JSON.parse(data);
+
+    emergency.status = "ACCEPTED";
+    emergency.acceptedAt = new Date().toLocaleTimeString();
+
+    localStorage.setItem(
+        "nagpurEmergency",
+        JSON.stringify(emergency)
+    );
+
+    /* Change alert appearance */
+
+    const alertBox =
+        document.getElementById("emergencyAlert");
+
+    alertBox.style.display = "block";
+
+    alertBox.style.borderLeftColor = "#00f59b";
+
+    alertBox.style.borderColor =
+        "rgba(0,245,155,.35)";
+
+
+    /* Change title */
+
+    const title =
+        alertBox.querySelector(".alert-title");
+
+    title.innerText =
+        "✓ EMERGENCY PRIORITY ACCEPTED";
+
+    title.style.color = "#00f59b";
+
+
+    /* Change badge */
+
+    const badge =
+        alertBox.querySelector(".new-badge");
+
+    badge.innerText = "ACCEPTED";
+
+    badge.style.background = "#008f68";
+
+
+    /* Change button */
+
+    const acceptButton =
+        alertBox.querySelector(".accept-btn");
+
+    acceptButton.innerText =
+        "✓ PRIORITY ACTIVE";
+
+    acceptButton.disabled = true;
+
+    acceptButton.style.background =
+        "#087f5b";
+
+
+    /* Stop animation */
+
+    alertBox.style.animation = "none";
+
+
+    /* Update AI message */
+
+    const recommendation =
+        alertBox.querySelector(
+            ".ai-recommendation"
+        );
+
+    recommendation.innerHTML = `
+
+        🟢 <b>Emergency Corridor Activated</b>
+
+        <br><br>
+
+        Route:
+
+        <b>
+        ${emergency.from}
+        →
+        ${emergency.to}
+        </b>
+
+        <br><br>
+
+        🚦 Traffic priority coordination
+        is now active.
+
+        <br>
+
+        📡 Junction monitoring enabled.
+
+    `;
+
+
+    alert(
+        "Emergency Priority Activated!\n\n" +
+        "Route: " +
+        emergency.from +
+        " → " +
+        emergency.to
+    );
+
+}
+
+const data=
+localStorage.getItem(
+"nagpurEmergency"
+);
+
+
+if(!data){
+
+return;
+}
+
+
+const emergency=
+JSON.parse(data);
+
+
+/* ACTIVE ONLY */
+
+if(emergency.status!=="ACTIVE"){
+
+return;
+
+}
+
+
+/* SHOW ALERT */
+
+document
+.getElementById("emergencyAlert")
+.style.display="block";
+
+
+document
+.getElementById("alertFrom")
+.innerText=
+emergency.from;
+
+
+document
+.getElementById("alertTo")
+.innerText=
+emergency.to;
+
+
+document
+.getElementById("alertID")
+.innerText=
+emergency.id;
+
+
+document
+.getElementById("routeText")
+.innerText=
+emergency.from+
+" → "+
+emergency.to;
+
+
+document
+.getElementById("alertCount")
+.innerText = "01";
+
+
+
+/* DRAW DEMO ROUTE */
+
+if(
+emergency.from==="Manewada Chowk"
+&&
+emergency.to==="Chhatrapati Square"
+){
+
+const route=[
+
+[21.1137,79.1072],
+
+[21.1120,79.1000],
+
+[21.1110,79.0920],
+
+[21.1105,79.0848]
+
+];
+
+
+emergencyLine=
+L.polyline(
+route,
+{
+color:"#ff3030",
+weight:7,
+opacity:.9
+}
+).addTo(map);
+
+
+map.fitBounds(
+emergencyLine.getBounds(),
+{
+padding:[40,40]
+}
+);
+
+}
+
+}
+
+
+
+/* =====================================
+   ACCEPT
+===================================== */
+
+function acceptEmergency(){
+
+const data=
+localStorage.getItem(
+"nagpurEmergency"
+);
+
+
+if(!data)
+return;
+
+
+const emergency=
+JSON.parse(data);
+
+
+emergency.status=
+"ACCEPTED";
+
+
+emergency.acceptedAt=
+new Date()
+.toLocaleTimeString();
+
+
+localStorage.setItem(
+
+"nagpurEmergency",
+
+JSON.stringify(emergency)
+
+);
+
+
+document
+.getElementById("emergencyAlert")
+.style.borderLeftColor=
+"#00f59b";
+
+
+document
+.getElementById("emergencyAlert")
+.style.borderColor=
+"rgba(0,245,155,.35)";
+
+
+document.querySelector(
+".alert-title"
+).innerText=
+"✓ EMERGENCY PRIORITY ACCEPTED";
+
+
+document.querySelector(
+".new-badge"
+).innerText=
+"ACTIVE";
+
+
+alert(
+
+"Emergency route accepted.\n\n"+
+"Traffic priority coordination started."
+
+);
+
+}
+
+
+
+/* =====================================
+   DISMISS
+===================================== */
+
+function dismissEmergency(){
+
+localStorage.removeItem(
+"nagpurEmergency"
+);
+
+
+document
+.getElementById("emergencyAlert")
+.style.display="none";
+
+
+if(emergencyLine){
+
+map.removeLayer(
+emergencyLine
+);
+
+}
+
+document
+.getElementById("alertCount")
+.innerText="00";
+
+}
+
+
+
+/* =====================================
+   SEARCH
+===================================== */
+
+function searchLocation(){
+
+const query=
+document
+.getElementById("searchInput")
+.value
+.toLowerCase()
+.trim();
+
+
+const found=
+junctions.find(function(j){
+
+return j.name
+.toLowerCase()
+.includes(query);
+
+});
+
+
+if(found){
+
+map.setView(
+[found.lat,found.lng],
+16
+);
+
+alert(
+found.name+
+" found.\nTraffic: "+
+found.status
+);
+
+}
+
+else{
+
+alert(
+"Location not found in demo network."
+);
+
+}
+
+}
+
+
+
+/* =====================================
+   VEHICLE COUNTER
+===================================== */
+
+setInterval(function(){
+
+const element=
+document.getElementById(
+"vehicles"
+);
+
+let number=
+parseInt(
+element.innerText
+.replace(",","")
+);
+
+number +=
+Math.floor(
+Math.random()*7
+)-2;
+
+element.innerText=
+number.toLocaleString();
+
+},3000);
+
+
+
+/* =====================================
+   LOGOUT
+===================================== */
+
+function logout(){
+
+localStorage.clear();
+
+window.location.href=
+"index.html";
+
+}
+
+
+
+/* START */
+
+checkEmergency();
+function showAcceptedState(emergency) {
+
+    const alertBox =
+        document.getElementById(
+            "emergencyAlert"
+        );
+
+
+    alertBox.style.display = "block";
+
+    alertBox.style.borderLeftColor =
+        "#00f59b";
+
+    alertBox.style.borderColor =
+        "rgba(0,245,155,.35)";
+
+    alertBox.style.animation =
+        "none";
+
+
+    const title =
+        alertBox.querySelector(
+            ".alert-title"
+        );
+
+    title.innerText =
+        "✓ EMERGENCY PRIORITY ACCEPTED";
+
+    title.style.color =
+        "#00f59b";
+
+
+    const badge =
+        alertBox.querySelector(
+            ".new-badge"
+        );
+
+    badge.innerText =
+        "ACCEPTED";
+
+    badge.style.background =
+        "#008f68";
+
+
+    const button =
+        alertBox.querySelector(
+            ".accept-btn"
+        );
+
+    button.innerText =
+        "✓ PRIORITY ACTIVE";
+
+    button.disabled =
+        true;
+
+    button.style.background =
+        "#087f5b";
+
+
+    const recommendation =
+        alertBox.querySelector(
+            ".ai-recommendation"
+        );
+
+
+    recommendation.innerHTML = `
+
+        🟢 <b>Emergency Corridor Activated</b>
+
+        <br><br>
+
+        Route:
+
+        <b>
+            ${emergency.from}
+            →
+            ${emergency.to}
+        </b>
+
+        <br><br>
+
+        ✅ Public user has been notified.
+
+        <br>
+
+        🚦 Traffic priority coordination is active.
+
+        <br>
+
+        📡 Junction monitoring enabled.
+
+    `;
+
+}
+function showAcceptedState(emergency) {
+
+    const alertBox =
+        document.getElementById(
+            "emergencyAlert"
+        );
+
+
+    alertBox.style.display = "block";
+
+    alertBox.style.borderLeftColor =
+        "#00f59b";
+
+    alertBox.style.borderColor =
+        "rgba(0,245,155,.35)";
+
+    alertBox.style.animation =
+        "none";
+
+
+    const title =
+        alertBox.querySelector(
+            ".alert-title"
+        );
+
+    title.innerText =
+        "✓ EMERGENCY PRIORITY ACCEPTED";
+
+    title.style.color =
+        "#00f59b";
+
+
+    const badge =
+        alertBox.querySelector(
+            ".new-badge"
+        );
+
+    badge.innerText =
+        "ACCEPTED";
+
+    badge.style.background =
+        "#008f68";
+
+
+    const button =
+        alertBox.querySelector(
+            ".accept-btn"
+        );
+
+    button.innerText =
+        "✓ PRIORITY ACTIVE";
+
+    button.disabled =
+        true;
+
+    button.style.background =
+        "#087f5b";
+
+
+    const recommendation =
+        alertBox.querySelector(
+            ".ai-recommendation"
+        );
+
+
+    recommendation.innerHTML = `
+
+        🟢 <b>Emergency Corridor Activated</b>
+
+        <br><br>
+
+        Route:
+
+        <b>
+            ${emergency.from}
+            →
+            ${emergency.to}
+        </b>
+
+        <br><br>
+
+        ✅ Public user has been notified.
+
+        <br>
+
+        🚦 Traffic priority coordination is active.
+
+        <br>
+
+        📡 Junction monitoring enabled.
+
+    `;
+
+}
+
+</script>
+
+    <script src="JS/app.js"></script>
+
+</body>
+</html>

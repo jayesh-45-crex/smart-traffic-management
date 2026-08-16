@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Nagpur AI Traffic Command Center</title>
+
+    <link rel="stylesheet" href="CSS/style.css">
+
+    <!-- Leaflet Map -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            🚦
+        </div>
+
+        <div>
+            <h2>NAGPUR AI</h2>
+            <span>TRAFFIC COMMAND CENTER</span>
+        </div>
+
+    </div>
+
+
+    <nav>
+
+        <a href="index.html" class="active">
+            Home
+        </a>
+
+        <a href="#">
+            Dashboard
+        </a>
+
+        <a href="#">
+            Live Map
+        </a>
+
+        <a href="#">
+            Cameras
+        </a>
+
+        <a href="#">
+            Analytics
+        </a>
+
+        <a href="#">
+            About
+        </a>
+        <a href="login.html" class="login-btn">
+    LOGIN
+</a>
+
+    </nav>
+
+
+    <div class="live-status">
+
+        <span class="live-circle"></span>
+
+        SYSTEM LIVE
+
+    </div>
+
+</header>
+
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+
+    <div class="hero-overlay"></div>
+
+
+    <div class="hero-content">
+
+
+        <div class="hero-label">
+
+            SMART NAGPUR • AI TRAFFIC SYSTEM
+
+        </div>
+
+
+        <h1>
+
+            Smarter Traffic.
+            <br>
+
+            <span>Safer Nagpur.</span>
+
+        </h1>
+
+
+        <p>
+
+            AI-powered traffic monitoring, intelligent
+            signal recommendations, emergency priority
+            and real-time city traffic intelligence.
+
+        </p>
+
+
+        <!-- SEARCH -->
+
+        <div class="main-search">
+
+            <span>🔍</span>
+
+            <input
+                type="text"
+                id="locationSearch"
+                placeholder="Search Nagpur location..."
+            >
+
+            <button onclick="searchLocation()">
+                Search
+            </button>
+
+        </div>
+
+
+        <div class="hero-buttons">
+
+            <button
+                class="primary-btn"
+                onclick="openMap()">
+
+                🗺️ View Live Traffic
+
+            </button>
+
+
+            <button
+                class="secondary-btn"
+                onclick="openDashboard()">
+
+                📊 Open Dashboard
+
+            </button>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- LIVE CITY CARD -->
+
+    <div class="city-card">
+
+        <div class="city-card-top">
+
+            <span>
+                NAGPUR CITY
+            </span>
+
+            <b>
+                ● LIVE
+            </b>
+
+        </div>
+
+
+        <div class="city-time"
+             id="indiaTime">
+
+            --:--:--
+
+        </div>
+
+
+        <div class="city-date"
+             id="indiaDate">
+
+            Loading...
+
+        </div>
+
+
+        <div class="city-location">
+
+            📍 Nagpur, Maharashtra, India
+
+        </div>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ================= STATISTICS ================= -->
+
+<section class="stats-section">
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            🚗
+        </div>
+
+        <div>
+
+            <span>
+                VEHICLES DETECTED
+            </span>
+
+            <strong id="vehicleCount">
+                1,248
+            </strong>
+
+            <small>
+                AI computer vision
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            🚦
+        </div>
+
+        <div>
+
+            <span>
+                MONITORED JUNCTIONS
+            </span>
+
+            <strong>
+                24
+            </strong>
+
+            <small>
+                Nagpur network
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon danger">
+            🔴
+        </div>
+
+        <div>
+
+            <span>
+                HIGH TRAFFIC ZONES
+            </span>
+
+            <strong>
+                07
+            </strong>
+
+            <small>
+                requires attention
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon emergency">
+            🚑
+        </div>
+
+        <div>
+
+            <span>
+                EMERGENCY EVENTS
+            </span>
+
+            <strong>
+                00
+            </strong>
+
+            <small>
+                currently active
+            </small>
+
+        </div>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ================= INTRO ================= -->
+
+<section class="intro-section">
+
+
+    <div class="section-label">
+
+        WHY NAGPUR AI?
+
+    </div>
+
+
+    <h2>
+
+        From Traffic Data
+        <span>to Intelligent Decisions.</span>
+
+    </h2>
+
+
+    <p>
+
+        Our prototype combines maps, computer vision,
+        traffic analytics and AI-assisted decision support
+        into one unified traffic command platform.
+
+    </p>
+
+
+</section>
+
+
+
+<!-- ================= AI FEATURES ================= -->
+
+<section class="features">
+
+
+    <div class="feature-card">
+
+        <div class="feature-number">
+            01
+        </div>
+
+        <div class="feature-icon">
+            🤖
+        </div>
+
+        <h3>
+            AI Vehicle Detection
+        </h3>
+
+        <p>
+
+            Detect cars, motorcycles, buses and
+            autos from traffic camera footage.
+
+        </p>
+
+        <span class="feature-tag">
+            COMPUTER VISION
+        </span>
+
+    </div>
+
+
+
+    <div class="feature-card">
+
+        <div class="feature-number">
+            02
+        </div>
+
+        <div class="feature-icon">
+            🚦
+        </div>
+
+        <h3>
+            Smart Signal Timing
+        </h3>
+
+        <p>
+
+            Analyse traffic density and generate
+            intelligent signal timing recommendations.
+
+        </p>
+
+        <span class="feature-tag">
+            AI DECISION SUPPORT
+        </span>
+
+    </div>
+
+
+
+    <div class="feature-card">
+
+        <div class="feature-number">
+            03
+        </div>
+
+        <div class="feature-icon">
+            🚑
+        </div>
+
+        <h3>
+            Emergency Priority
+        </h3>
+
+        <p>
+
+            Identify emergency situations and
+            recommend priority corridors.
+
+        </p>
+
+        <span class="feature-tag">
+            EMERGENCY RESPONSE
+        </span>
+
+    </div>
+
+
+
+    <div class="feature-card">
+
+        <div class="feature-number">
+            04
+        </div>
+
+        <div class="feature-icon">
+            🏟️
+        </div>
+
+        <h3>
+            Event & Rally Mode
+        </h3>
+
+        <p>
+
+            Help traffic operators plan routes,
+            diversions and congestion management.
+
+        </p>
+
+        <span class="feature-tag">
+            EVENT MANAGEMENT
+        </span>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= NAGPUR SECTION ================= -->
+
+<section class="nagpur-section">
+
+
+    <div class="nagpur-image">
+
+        <div class="image-overlay"></div>
+
+
+        <div class="nagpur-content">
+
+            <span>
+                BUILT FOR NAGPUR
+            </span>
+
+            <h2>
+                One City.
+                <br>
+                One Intelligent Network.
+            </h2>
+
+            <p>
+
+                Designed as a prototype for
+                AI-assisted traffic management
+                across Nagpur's urban road network.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ================= QUICK ACCESS ================= -->
+
+<section class="quick-section">
+
+
+    <div class="section-label">
+        COMMAND CENTER
+    </div>
+
+
+    <h2>
+        Everything You Need,
+        <span>In One Place.</span>
+    </h2>
+
+
+    <div class="quick-grid">
+
+
+        <div class="quick-card">
+
+            <div>
+                🗺️
+            </div>
+
+            <h3>
+                Live Traffic Map
+            </h3>
+
+            <p>
+                Monitor traffic conditions
+                across Nagpur.
+            </p>
+
+            <button onclick="openMap()">
+                Open Map →
+            </button>
+
+        </div>
+
+
+
+        <div class="quick-card">
+
+            <div>
+                📹
+            </div>
+
+            <h3>
+                Camera Monitoring
+            </h3>
+
+            <p>
+                Analyse traffic camera
+                footage using AI.
+            </p>
+
+            <button>
+                View Cameras →
+            </button>
+
+        </div>
+
+
+
+        <div class="quick-card">
+
+            <div>
+                🚌
+            </div>
+
+            <h3>
+                Bus Tracking
+            </h3>
+
+            <p>
+                Track public transport
+                routes and delays.
+            </p>
+
+            <button>
+                Track Buses →
+            </button>
+
+        </div>
+
+
+
+        <div class="quick-card emergency-box">
+
+            <div>
+                🆘
+            </div>
+
+            <h3>
+                Emergency Support
+            </h3>
+
+            <p>
+                Access verified emergency
+                and traffic support information.
+            </p>
+
+            <button>
+                Get Help →
+            </button>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= AI ASSISTANT ================= -->
+
+<div class="ai-assistant"
+     id="aiAssistant">
+
+
+    <div class="ai-header">
+
+        <div class="ai-avatar">
+            🤖
+        </div>
+
+        <div>
+
+            <strong>
+                Nagpur AI
+            </strong>
+
+            <span>
+                Traffic Assistant
+            </span>
+
+        </div>
+
+        <button onclick="toggleAI()">
+            ×
+        </button>
+
+    </div>
+
+
+    <div class="ai-body">
+
+        <div class="ai-message">
+
+            👋 Hello!
+
+            <br><br>
+
+            I'm your Nagpur Traffic Assistant.
+
+            <br><br>
+
+            What would you like to check?
+
+        </div>
+
+
+        <div class="ai-options">
+
+            <button>
+                🚗 Traffic
+            </button>
+
+            <button>
+                🗺️ Route
+            </button>
+
+            <button>
+                🚦 Junction
+            </button>
+
+            <button>
+                🚑 Emergency
+            </button>
+
+        </div>
+
+
+        <div class="ai-input">
+
+            <input
+                type="text"
+                placeholder="Ask about Nagpur traffic..."
+            >
+
+            <button>
+                ➤
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- AI FLOAT BUTTON -->
+
+<button
+    class="ai-float"
+    onclick="toggleAI()">
+
+    🤖
+
+</button>
+
+
+
+<!-- ================= EMERGENCY STRIP ================= -->
+
+<section class="emergency-strip">
+
+
+    <div>
+
+        <span>
+            EMERGENCY & TRAFFIC SUPPORT
+        </span>
+
+        <h2>
+            Need Help on the Road?
+        </h2>
+
+    </div>
+
+
+    <div class="support-buttons">
+
+        <button>
+            👮 Police
+        </button>
+
+        <button>
+            🚑 Ambulance
+        </button>
+
+        <button>
+            🔥 Fire
+        </button>
+
+        <button>
+            🚦 Report Traffic
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+
+    <div class="footer-logo">
+
+        🚦
+
+        <strong>
+            NAGPUR AI TRAFFIC COMMAND CENTER
+        </strong>
+
+    </div>
+
+
+    <p>
+
+        AI-Assisted Intelligent Traffic Management
+        Prototype for Nagpur
+
+    </p>
+
+
+    <div class="footer-bottom">
+
+        <span>
+            Hackathon Prototype
+        </span>
+
+        <span>
+            Observe • Predict • Coordinate • Respond
+        </span>
+
+    </div>
+
+
+</footer>
+
+
+
+<script src="JS/main.js"></script>
+
+<script>
+function openLogin() {
+    window.location.href = "login.html";
+}
+</script>
+    <script src="JS/app.js"></script>
+
+</body>
+
+</html>

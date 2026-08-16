@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Nagpur AI | Public Dashboard</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #050d18;
+            color: white;
+        }
+
+        /* HEADER */
+
+        header {
+            height: 70px;
+
+            padding: 0 5%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            background: #081727;
+
+            border-bottom:
+                1px solid #193750;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            width: 44px;
+            height: 44px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 12px;
+
+            background: #092b40;
+
+            border: 1px solid #00d9ff;
+
+            font-size: 22px;
+        }
+
+        .brand h1 {
+            font-size: 20px;
+        }
+
+        .brand span {
+            color: #00d9ff;
+        }
+
+        .brand small {
+            display: block;
+
+            color: #718499;
+
+            font-size: 9px;
+
+            letter-spacing: 2px;
+        }
+
+        .user-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+            color: #9eafc0;
+
+            font-size: 12px;
+        }
+
+        .logout {
+            background: #d63031;
+
+            color: white;
+
+            border: none;
+
+            border-radius: 7px;
+
+            padding: 9px 15px;
+
+            cursor: pointer;
+        }
+
+
+        /* MAIN */
+
+        .container {
+            padding: 30px 5%;
+        }
+
+        .welcome h2 {
+            font-size: 28px;
+        }
+
+        .welcome span {
+            color: #00d9ff;
+        }
+
+        .welcome p {
+            margin-top: 7px;
+
+            color: #7d90a4;
+
+            font-size: 13px;
+        }
+
+
+        /* GRID */
+
+        .dashboard-grid {
+
+            margin-top: 25px;
+
+            display: grid;
+
+            grid-template-columns:
+                1.4fr 1fr;
+
+            gap: 20px;
+        }
+
+
+        /* CARD */
+
+        .card {
+
+            background: #081727;
+
+            border:
+                1px solid #193750;
+
+            border-radius: 15px;
+
+            padding: 25px;
+        }
+
+        .card h3 {
+            font-size: 18px;
+
+            margin-bottom: 8px;
+        }
+
+        .card-description {
+
+            color: #8194a8;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+
+            margin-bottom: 20px;
+        }
+
+
+        /* EMERGENCY */
+ 
+        .emergency-card {
+
+            border:
+                1px solid rgba(255,65,65,.35);
+
+            box-shadow:
+                0 0 30px rgba(255,50,50,.04);
+        }
+
+        .emergency-title {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+        .emergency-icon {
+
+            width: 42px;
+            height: 42px;
+
+            border-radius: 10px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background: rgba(255,50,50,.12);
+
+            font-size: 22px;
+        }
+
+        .emergency-title h3 {
+            color: #ff5a5a;
+        }
+
+
+        /* FORM */
+
+        label {
+
+            display: block;
+
+            margin-top: 15px;
+
+            margin-bottom: 7px;
+
+            color: #a9b9c8;
+
+            font-size: 11px;
+        }
+
+        select {
+
+            width: 100%;
+
+            height: 45px;
+
+            padding: 0 12px;
+
+            border-radius: 8px;
+
+            border:
+                1px solid #29465e;
+
+            background: #061321;
+
+            color: white;
+
+            outline: none;
+
+            cursor: pointer;
+        }
+
+        select:focus {
+
+            border-color: #00d9ff;
+        }
+
+
+        /* REQUEST BUTTON */
+
+        .emergency-btn {
+
+            width: 100%;
+
+            height: 48px;
+
+            margin-top: 20px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #d63031,
+                    #ff5b35
+                );
+
+            color: white;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: .2s;
+
+        }
+
+        .emergency-btn:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 20px rgba(255,50,50,.2);
+        }
+       
+
+        /* STATUS */
+
+        #requestStatus {
+
+            display: none;
+
+            margin-top: 18px;
+
+            padding: 15px;
+
+            border-radius: 9px;
+
+            background:
+                rgba(0,210,255,.06);
+
+            border:
+                1px solid rgba(0,210,255,.2);
+        }
+
+        .status-title {
+
+            color: #00f59b;
+
+            font-weight: bold;
+
+            font-size: 12px;
+
+            margin-bottom: 8px;
+        }
+
+        .status-text {
+
+            color: #9cafc0;
+
+            font-size: 11px;
+
+            line-height: 1.7;
+        }
+
+
+        /* TRAFFIC */
+
+        .traffic-list {
+
+            margin-top: 15px;
+        }
+
+        .traffic-item {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding: 13px 0;
+
+            border-bottom:
+                1px solid #172c40;
+        }
+
+        .traffic-item:last-child {
+            border-bottom: none;
+        }
+
+        .location {
+
+            font-size: 12px;
+        }
+
+        .location small {
+
+            display: block;
+
+            color: #6e8195;
+
+            margin-top: 4px;
+        }
+
+        .high {
+            color: #ff4c4c;
+        }
+
+        .medium {
+            color: #ffb52e;
+        }
+
+        .low {
+            color: #00f59b;
+        }
+
+
+        /* QUICK */
+
+        .quick-grid {
+
+            margin-top: 20px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3,1fr);
+
+            gap: 15px;
+        }
+
+        .quick-card {
+
+            padding: 20px;
+
+            background: #081727;
+
+            border:
+                1px solid #193750;
+
+            border-radius: 13px;
+        }
+
+        .quick-card .icon {
+
+            font-size: 25px;
+
+            margin-bottom: 10px;
+        }
+
+        .quick-card h3 {
+
+            font-size: 14px;
+
+            margin-bottom: 7px;
+        }
+
+        .quick-card p {
+
+            color: #718499;
+
+            font-size: 11px;
+
+            line-height: 1.5;
+        }
+
+
+        /* MAP PREVIEW */
+
+        .map-preview {
+
+            height: 190px;
+
+            margin-top: 20px;
+
+            border-radius: 12px;
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    #102c3d,
+                    #061522
+                );
+
+            border:
+                1px solid #1b405c;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+        }
+
+        .map-preview div {
+
+            font-size: 35px;
+        }
+
+        .map-preview p {
+
+            margin-top: 8px;
+
+            color: #7f93a7;
+
+            font-size: 11px;
+        }
+
+
+        /* RESPONSIVE */
+
+        @media(max-width:900px) {
+
+            .dashboard-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+            .quick-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media(max-width:600px) {
+
+            header {
+
+                padding: 0 15px;
+            }
+
+            .user-area span {
+
+                display: none;
+            }
+
+            .container {
+
+                padding: 25px 15px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <div class="brand">
+
+        <div class="logo">
+            🚦
+        </div>
+
+        <div>
+
+            <h1>
+                NAGPUR <span>AI</span>
+            </h1>
+
+            <small>
+                TRAFFIC COMMAND CENTER
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <div class="user-area">
+
+        <span>
+            ● SYSTEM LIVE
+        </span>
+
+        👤 Public User
+
+        <button
+            class="logout"
+            onclick="logout()">
+
+            Logout
+
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<!-- ================= MAIN ================= -->
+
+<div class="container">
+
+
+    <div class="welcome">
+
+        <h2>
+            Welcome to
+            <span>Nagpur AI</span>
+        </h2>
+
+        <p>
+            Check traffic conditions and request
+            emergency route assistance.
+        </p>
+
+    </div>
+
+
+
+    <!-- ================= MAIN GRID ================= -->
+
+    <div class="dashboard-grid">
+
+
+        <!-- EMERGENCY -->
+
+        <div class="card emergency-card">
+
+
+            <div class="emergency-title">
+
+                <div class="emergency-icon">
+                    🚑
+                </div>
+
+                <div>
+
+                    <h3>
+                        Emergency Route Assistance
+                    </h3>
+
+                    <small style="
+                        color:#75879a;
+                        font-size:10px;
+                    ">
+                        Request traffic priority support
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <p class="card-description">
+
+                If you are travelling during an emergency,
+                select your current location and destination.
+                The traffic command center can receive the
+                request and coordinate traffic assistance.
+
+            </p>
+
+
+            <!-- CURRENT LOCATION -->
+
+            <label>
+                📍 Current Location
+            </label>
+
+            <select id="fromLocation">
+
+                <option value="">
+                    Select current location
+                </option>
+
+                <option>
+                    Manewada Chowk
+                </option>
+
+                <option>
+                    Chhatrapati Square
+                </option>
+
+                <option>
+                    Medical Square
+                </option>
+
+                <option>
+                    Ajni Chowk
+                </option>
+
+                <option>
+                    Zero Mile
+                </option>
+
+                <option>
+                    RBI Square
+                </option>
+
+            </select>
+
+
+
+            <!-- DESTINATION -->
+
+            <label>
+                🎯 Emergency Destination
+            </label>
+
+            <select id="toLocation">
+
+                <option value="">
+                    Select destination
+                </option>
+
+                <option>
+                    Chhatrapati Square
+                </option>
+
+                <option>
+                    Manewada Chowk
+                </option>
+
+                <option>
+                    Medical Square
+                </option>
+
+                <option>
+                    Ajni Chowk
+                </option>
+
+                <option>
+                    Zero Mile
+                </option>
+
+                <option>
+                    RBI Square
+                </option>
+
+            </select>
+
+
+
+            <!-- REQUEST -->
+
+            <button
+                class="emergency-btn"
+                onclick="requestEmergency()">
+
+                🚨 REQUEST EMERGENCY PRIORITY
+
+            </button>
+
+
+
+            <!-- STATUS -->
+
+            <div id="requestStatus">
+
+                <div class="status-title">
+
+                    ✓ Emergency Request Sent
+
+                </div>
+
+                <div
+                    class="status-text"
+                    id="statusText">
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- TRAFFIC -->
+
+        <div class="card">
+
+            <h3>
+                🚦 Current Traffic
+            </h3>
+
+            <p class="card-description">
+
+                AI-assisted traffic status
+                across selected Nagpur junctions.
+
+            </p>
+
+
+            <div class="traffic-list">
+
+
+                <div class="traffic-item">
+
+                    <div class="location">
+
+                        Manewada Chowk
+
+                        <small>
+                            CAM-002
+                        </small>
+
+                    </div>
+
+                    <b class="high">
+                        HIGH
+                    </b>
+
+                </div>
+
+
+                <div class="traffic-item">
+
+                    <div class="location">
+
+                        Chhatrapati Square
+
+                        <small>
+                            CAM-003
+                        </small>
+
+                    </div>
+
+                    <b class="high">
+                        HIGH
+                    </b>
+
+                </div>
+
+
+                <div class="traffic-item">
+
+                    <div class="location">
+
+                        Medical Square
+
+                        <small>
+                            CAM-004
+                        </small>
+
+                    </div>
+
+                    <b class="medium">
+                        MEDIUM
+                    </b>
+
+                </div>
+
+
+                <div class="traffic-item">
+
+                    <div class="location">
+
+                        Zero Mile
+
+                        <small>
+                            CAM-001
+                        </small>
+
+                    </div>
+
+                    <b class="low">
+                        LOW
+                    </b>
+
+                </div>
+
+
+                <div class="traffic-item">
+
+                    <div class="location">
+
+                        RBI Square
+
+                        <small>
+                            CAM-006
+                        </small>
+
+                    </div>
+
+                    <b class="medium">
+                        MEDIUM
+                    </b>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================= QUICK ACCESS ================= -->
+
+    <h2 style="
+        margin-top:35px;
+        font-size:20px;
+    ">
+
+        Quick Access
+
+    </h2>
+
+
+    <div class="quick-grid">
+
+
+        <div class="quick-card" role="button" tabindex="0" onclick="window.location.href='map.html'" onkeydown="if(event.key==='Enter'||event.key===' '){window.location.href='map.html'}">
+
+            <div class="icon">
+                🗺️
+            </div>
+
+            <h3>
+                Live Traffic Map
+            </h3>
+
+            <p>
+                View Nagpur traffic junctions
+                and congestion areas.
+            </p>
+
+        </div>
+
+
+        <div class="quick-card" role="button" tabindex="0" onclick="window.location.href='rally-mode.html'" onkeydown="if(event.key==='Enter'||event.key===' '){window.location.href='rally-mode.html'}">
+
+            <div class="icon">
+                🏟️
+            </div>
+
+            <h3>
+                Events & Rally
+            </h3>
+
+            <p>
+                Check event-related traffic
+                and possible diversions.
+            </p>
+
+        </div>
+
+
+        <div class="quick-card" role="button" tabindex="0" onclick="window.location.href='ai-traffic.html'" onkeydown="if(event.key==='Enter'||event.key===' '){window.location.href='ai-traffic.html'}">
+
+            <div class="icon">
+                🤖
+            </div>
+
+            <h3>
+                AI Traffic Assistant
+            </h3>
+
+            <p>
+                Get traffic and route
+                information from the system.
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================= MAP PREVIEW ================= -->
+
+    <div class="card"
+         style="margin-top:20px;">
+
+        <h3>
+            🗺️ Nagpur Traffic Network
+        </h3>
+
+        <div class="map-preview">
+
+            <div>
+
+                🗺️
+
+                <p>
+                    Nagpur Live Traffic Map
+                    <br>
+                    Available in Command Center
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+
+/* =================================
+   EMERGENCY REQUEST
+================================= */
+
+function requestEmergency() {
+
+
+    const from =
+        document
+        .getElementById("fromLocation")
+        .value;
+
+
+    const to =
+        document
+        .getElementById("toLocation")
+        .value;
+
+
+    /* VALIDATION */
+
+    if (!from || !to) {
+
+        alert(
+            "Please select current location and destination."
+        );
+
+        return;
+    }
+
+
+    if (from === to) {
+
+        alert(
+            "Current location and destination cannot be same."
+        );
+
+        return;
+    }
+
+
+    /* REQUEST ID */
+
+    const requestID =
+        "EMG-" +
+        Date.now()
+        .toString()
+        .slice(-6);
+
+
+    /* SAVE EMERGENCY */
+
+    const emergency = {
+
+        id: requestID,
+
+        from: from,
+
+        to: to,
+
+        time:
+            new Date()
+            .toLocaleTimeString(),
+
+        status: "ACTIVE"
+
+    };
+
+
+    localStorage.setItem(
+
+        "nagpurEmergency",
+
+        JSON.stringify(emergency)
+        
+
+    );
+
+
+    /* SHOW STATUS */
+
+    document
+        .getElementById("requestStatus")
+        .style.display = "block";
+
+
+    document
+        .getElementById("statusText")
+        .innerHTML = `
+
+            Request ID:
+            <b>${requestID}</b>
+
+            <br>
+
+            📍 ${from}
+
+            →
+
+            🎯 ${to}
+
+            <br>
+
+            ⏱️ Sent:
+            ${emergency.time}
+
+            <br><br>
+
+            🚨 Traffic Command Center
+            has received your request.
+
+        `;
+
+
+    /* BUTTON */
+
+    const button =
+        document.querySelector(
+            ".emergency-btn"
+        );
+
+
+    button.innerText =
+        "✓ EMERGENCY REQUEST ACTIVE";
+
+
+    button.style.background =
+        "linear-gradient(90deg,#087f5b,#00a878)";
+
+
+    button.disabled = true;
+
+
+    alert(
+
+        "Emergency request sent successfully!\n\n" +
+
+        "Request ID: " +
+        requestID
+
+    );
+
+}
+
+/* =================================
+   POLICE ACCEPTED EMERGENCY
+   PUBLIC LIVE UPDATE
+================================= */
+
+function checkEmergencyApproval() {
+
+    const data =
+        localStorage.getItem("nagpurEmergency");
+
+    if (!data) {
+        return;
+    }
+
+    const emergency =
+        JSON.parse(data);
+
+    if (
+        emergency.status === "ACCEPTED"
+    ) {
+
+        showApprovedRoute(emergency);
+
+    }
+
+}
+
+
+/* =================================
+   SHOW APPROVED ROUTE
+================================= */
+
+function showApprovedRoute(emergency) {
+
+    const status =
+        document.getElementById(
+            "requestStatus"
+        );
+
+    const text =
+        document.getElementById(
+            "statusText"
+        );
+
+    if (!status || !text) {
+        return;
+    }
+
+    status.style.display = "block";
+
+    status.style.border =
+        "1px solid rgba(0,245,155,.40)";
+
+    status.style.background =
+        "rgba(0,245,155,.06)";
+
+
+    text.innerHTML = `
+
+        <div style="
+            color:#00f59b;
+            font-weight:bold;
+            font-size:13px;
+            margin-bottom:10px;
+        ">
+
+            ✅ EMERGENCY REQUEST APPROVED
+
+        </div>
+
+
+        🚑 Traffic Control Center
+        has accepted your emergency request.
+
+        <br><br>
+
+        📍 From:
+        <b>${emergency.from}</b>
+
+        <br>
+
+        🎯 Destination:
+        <b>${emergency.to}</b>
+
+        <br>
+
+        🚨 Priority:
+        <b style="color:#ff5555;">
+            HIGH
+        </b>
+
+        <br><br>
+
+        🗺️
+
+        <b style="color:#00d9ff;">
+            PRIORITY ROUTE RELEASED
+        </b>
+
+        <br><br>
+
+        ${emergency.route
+            ? `
+                Distance:
+                <b>${emergency.route.distance} km</b>
+
+                <br>
+
+                Estimated Time:
+                <b>${emergency.route.duration} min</b>
+              `
+            : `
+                Route:
+                <b>${emergency.from}
+                → ${emergency.to}</b>
+              `
+        }
+
+        <br><br>
+
+        <button
+            onclick="openApprovedRoute()"
+            style="
+                width:100%;
+                padding:10px;
+                border:0;
+                border-radius:7px;
+                background:#087fa8;
+                color:white;
+                font-weight:bold;
+                cursor:pointer;
+            ">
+
+            🗺️ OPEN APPROVED ROUTE
+
+        </button>
+
+    `;
+
+}
+
+
+/* =================================
+   OPEN APPROVED ROUTE
+================================= */
+
+function openApprovedRoute() {
+
+    const emergency =
+        JSON.parse(
+            localStorage.getItem(
+                "nagpurEmergency"
+            )
+        );
+
+
+    if (!emergency) {
+        return;
+    }
+
+
+    alert(
+
+        "✅ Emergency Route Approved\n\n" +
+
+        "FROM: " +
+        emergency.from +
+
+        "\nTO: " +
+        emergency.to +
+
+        "\n\n" +
+
+        "Traffic Control Center has approved the priority route."
+
+    );
+
+}
+
+
+/* =================================
+   LIVE TAB UPDATE
+================================= */
+
+window.addEventListener(
+    "storage",
+    function(event) {
+
+        if (
+            event.key ===
+            "nagpurEmergency"
+        ) {
+
+            checkEmergencyApproval();
+
+        }
+
+    }
+);
+
+
+/* Check on page load */
+
+checkEmergencyApproval();
+
+/* =================================
+   LOGOUT
+================================= */
+
+function logout() {
+
+    localStorage.clear();
+
+    window.location.href =
+        "index.html";
+
+}
+
+
+</script>
+
+
+    <script src="JS/app.js"></script>
+
+</body>
+
+</html>

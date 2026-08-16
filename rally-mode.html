@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Nagpur AI | Event Command Mode</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #050d18;
+            color: white;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            height: 70px;
+            padding: 0 25px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            background: #081727;
+            border-bottom: 1px solid #193750;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            width: 45px;
+            height: 45px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 11px;
+
+            background: #092b40;
+            border: 1px solid #00d9ff;
+
+            font-size: 23px;
+        }
+
+        .brand h1 {
+            font-size: 20px;
+        }
+
+        .brand h1 span {
+            color: #00d9ff;
+        }
+
+        .brand small {
+            display: block;
+
+            margin-top: 3px;
+
+            color: #718499;
+
+            font-size: 8px;
+
+            letter-spacing: 2px;
+        }
+
+        .back-btn {
+            text-decoration: none;
+
+            padding: 9px 14px;
+
+            border-radius: 7px;
+
+            color: #c9d9e5;
+
+            background: #0b1e2e;
+
+            border: 1px solid #29465c;
+
+            font-size: 10px;
+        }
+
+
+        /* ================= MAIN ================= */
+
+        .container {
+            max-width: 1300px;
+            margin: auto;
+
+            padding: 30px;
+        }
+
+        .title h2 {
+            font-size: 28px;
+        }
+
+        .title p {
+            color: #778da0;
+            font-size: 12px;
+            margin-top: 6px;
+        }
+
+
+        /* ================= EVENT FORM ================= */
+
+        .main-grid {
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 18px;
+
+            margin-top: 25px;
+        }
+
+        .card {
+            background: #081727;
+
+            border: 1px solid #193750;
+
+            border-radius: 14px;
+
+            padding: 22px;
+        }
+
+        .card h3 {
+            font-size: 17px;
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+
+            color: #9aacbb;
+
+            font-size: 10px;
+
+            margin-top: 14px;
+
+            margin-bottom: 6px;
+        }
+
+        input,
+        select {
+            width: 100%;
+
+            height: 44px;
+
+            padding: 0 12px;
+
+            border-radius: 7px;
+
+            border: 1px solid #29465c;
+
+            background: #061321;
+
+            color: white;
+
+            outline: none;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #00d9ff;
+        }
+
+        .create-btn {
+            width: 100%;
+
+            margin-top: 20px;
+
+            height: 46px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #087da7,
+                    #00a7d2
+                );
+
+            color: white;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .create-btn:hover {
+            transform: translateY(-1px);
+        }
+
+
+        /* ================= EVENT STATUS ================= */
+
+        .event-status {
+            display: none;
+
+            margin-top: 15px;
+
+            padding: 13px;
+
+            border-radius: 8px;
+
+            background:
+                rgba(0, 245, 155, .06);
+
+            border: 1px solid
+                rgba(0, 245, 155, .20);
+
+            color: #9bb2bf;
+
+            font-size: 11px;
+
+            line-height: 1.7;
+        }
+
+
+        /* ================= RISK ================= */
+
+        .risk-box {
+            padding: 18px;
+
+            border-radius: 10px;
+
+            background: #061421;
+
+            border: 1px solid #1a3548;
+
+            margin-bottom: 15px;
+        }
+
+        .risk-title {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+        }
+
+        .risk-level {
+            padding: 6px 9px;
+
+            border-radius: 5px;
+
+            background:
+                rgba(255, 70, 70, .12);
+
+            color: #ff5555;
+
+            font-size: 9px;
+
+            font-weight: bold;
+        }
+
+        .risk-box p {
+            margin-top: 10px;
+
+            color: #7f94a5;
+
+            font-size: 11px;
+
+            line-height: 1.6;
+        }
+
+
+        /* ================= JUNCTIONS ================= */
+
+        .junction-list {
+            display: grid;
+
+            gap: 8px;
+        }
+
+        .junction-item {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding: 12px;
+
+            border-radius: 7px;
+
+            background: #061421;
+
+            border: 1px solid #173147;
+
+            font-size: 11px;
+        }
+
+        .junction-item small {
+            display: block;
+
+            margin-top: 4px;
+
+            color: #6f8496;
+        }
+
+        .high {
+            color: #ff4b4b;
+            font-weight: bold;
+        }
+
+        .medium {
+            color: #ffb52e;
+            font-weight: bold;
+        }
+
+        .low {
+            color: #00f59b;
+            font-weight: bold;
+        }
+
+
+        /* ================= ROUTE ================= */
+
+        .route-box {
+            margin-top: 18px;
+
+            padding: 17px;
+
+            border-radius: 10px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0a2535,
+                    #071521
+                );
+
+            border: 1px solid #23546a;
+        }
+
+        .route-box h4 {
+            color: #00d9ff;
+            font-size: 11px;
+        }
+
+        .route {
+            margin-top: 14px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            flex-wrap: wrap;
+
+            color: #d4e1e8;
+
+            font-size: 11px;
+        }
+
+        .route-point {
+            padding: 7px 9px;
+
+            border-radius: 5px;
+
+            background: #102d3c;
+
+            border: 1px solid #24556b;
+        }
+
+        .arrow {
+            color: #00f59b;
+            font-weight: bold;
+        }
+
+
+        /* ================= EMERGENCY ================= */
+
+        .emergency-corridor {
+            margin-top: 15px;
+
+            padding: 14px;
+
+            border-radius: 8px;
+
+            border-left: 4px solid #00f59b;
+
+            background:
+                rgba(0,245,155,.05);
+        }
+
+        .emergency-corridor strong {
+            color: #00f59b;
+        }
+
+        .emergency-corridor p {
+            margin-top: 6px;
+
+            color: #91a6b5;
+
+            font-size: 10px;
+
+            line-height: 1.6;
+        }
+
+
+        /* ================= IMPACT ================= */
+
+        .impact-grid {
+            margin-top: 18px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3,1fr);
+
+            gap: 10px;
+        }
+
+        .impact {
+            padding: 13px;
+
+            text-align: center;
+
+            background: #061421;
+
+            border: 1px solid #173147;
+
+            border-radius: 7px;
+        }
+
+        .impact b {
+            display: block;
+
+            font-size: 20px;
+
+            color: #00d9ff;
+        }
+
+        .impact small {
+            color: #71879a;
+
+            font-size: 8px;
+
+            margin-top: 4px;
+        }
+
+
+        /* ================= NOTE ================= */
+
+        .note {
+            margin-top: 20px;
+
+            padding: 13px;
+
+            border: 1px solid #19364b;
+
+            border-radius: 8px;
+
+            color: #72879a;
+
+            background: #071521;
+
+            font-size: 9px;
+
+            line-height: 1.6;
+        }
+
+
+        @media(max-width:900px) {
+
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media(max-width:600px) {
+
+            .container {
+                padding: 18px;
+            }
+
+            .impact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            header {
+                padding: 0 14px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="brand">
+
+        <div class="logo">
+            🏟️
+        </div>
+
+        <div>
+
+            <h1>
+                NAGPUR <span>AI</span>
+            </h1>
+
+            <small>
+                EVENT & RALLY COMMAND MODE
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <a
+        href="police-dashboard.html"
+        class="back-btn">
+
+        ← Command Center
+
+    </a>
+
+</header>
+
+
+
+<main class="container">
+
+
+    <div class="title">
+
+        <h2>
+            🏟️ Event / Rally Management
+        </h2>
+
+        <p>
+            Create an event scenario and generate
+            an AI-assisted traffic management plan.
+        </p>
+
+    </div>
+
+
+
+    <div class="main-grid">
+
+
+        <!-- =====================================
+             CREATE EVENT
+        ====================================== -->
+
+        <div class="card">
+
+            <h3>
+                Create Event Plan
+            </h3>
+
+
+            <label>
+                Event / Rally Name
+            </label>
+
+            <input
+                id="eventName"
+                type="text"
+                placeholder="Example: City Rally">
+
+
+            <label>
+                Start Location
+            </label>
+
+            <select id="startLocation">
+
+                <option value="">
+                    Select starting location
+                </option>
+
+                <option>
+                    Zero Mile
+                </option>
+
+                <option>
+                    RBI Square
+                </option>
+
+                <option>
+                    Variety Square
+                </option>
+
+                <option>
+                    Manewada Chowk
+                </option>
+
+            </select>
+
+
+            <label>
+                Destination
+            </label>
+
+            <select id="destination">
+
+                <option value="">
+                    Select destination
+                </option>
+
+                <option>
+                    Kasturchand Park
+                </option>
+
+                <option>
+                    Chhatrapati Square
+                </option>
+
+                <option>
+                    Medical Square
+                </option>
+
+                <option>
+                    Variety Square
+                </option>
+
+            </select>
+
+
+            <label>
+                Expected Crowd
+            </label>
+
+            <select id="crowd">
+
+                <option value="">
+                    Select crowd size
+                </option>
+
+                <option value="low">
+                    Low — under 1,000
+                </option>
+
+                <option value="medium">
+                    Medium — 1,000 to 5,000
+                </option>
+
+                <option value="high">
+                    High — 5,000 to 15,000
+                </option>
+
+                <option value="critical">
+                    Very High — 15,000+
+                </option>
+
+            </select>
+
+
+            <label>
+                Event Time
+            </label>
+
+            <input
+                id="eventTime"
+                type="time">
+
+
+            <button
+                class="create-btn"
+                onclick="generatePlan()">
+
+                🤖 GENERATE AI TRAFFIC PLAN
+
+            </button>
+
+
+            <div
+                id="eventStatus"
+                class="event-status">
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =====================================
+             AI RISK
+        ====================================== -->
+
+        <div class="card">
+
+            <h3>
+                🤖 AI Event Analysis
+            </h3>
+
+
+            <div class="risk-box">
+
+                <div class="risk-title">
+
+                    <strong>
+                        Traffic Risk
+                    </strong>
+
+                    <span
+                        id="riskLevel"
+                        class="risk-level">
+
+                        WAITING
+
+                    </span>
+
+                </div>
+
+                <p id="riskText">
+
+                    Create an event plan to
+                    analyse possible traffic impact.
+
+                </p>
+
+            </div>
+
+
+
+            <h3>
+                🚦 Potentially Affected Junctions
+            </h3>
+
+
+            <div class="junction-list">
+
+
+                <div class="junction-item">
+
+                    <div>
+                        Zero Mile
+                        <small>
+                            Central
+                        </small>
+                    </div>
+
+                    <span class="medium">
+                        MEDIUM
+                    </span>
+
+                </div>
+
+
+                <div class="junction-item">
+
+                    <div>
+                        RBI Square
+                        <small>
+                            Central
+                        </small>
+                    </div>
+
+                    <span class="high">
+                        HIGH
+                    </span>
+
+                </div>
+
+
+                <div class="junction-item">
+
+                    <div>
+                        Variety Square
+                        <small>
+                            Central
+                        </small>
+                    </div>
+
+                    <span class="high">
+                        HIGH
+                    </span>
+
+                </div>
+
+
+                <div class="junction-item">
+
+                    <div>
+                        Kasturchand Park
+                        <small>
+                            Central
+                        </small>
+                    </div>
+
+                    <span class="medium">
+                        MEDIUM
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================
+         AI PLAN
+    ====================================== -->
+
+    <div
+        id="planSection"
+        class="card"
+        style="margin-top:18px;">
+
+        <h3>
+            🧠 AI-Generated Event Plan
+        </h3>
+
+
+        <div
+            id="planContent"
+            style="
+                color:#778da0;
+                font-size:11px;
+            ">
+
+            Select event details above
+            and generate the plan.
+
+        </div>
+
+    </div>
+
+
+
+    <div class="note">
+
+        ⚠️ <b>Hackathon Prototype:</b>
+        Event analysis and route recommendations
+        are simulated decision-support outputs.
+        Real deployment would use verified traffic,
+        event and authorized infrastructure data.
+
+    </div>
+
+
+</main>
+
+
+
+<script>
+
+
+/* =================================================
+   GENERATE EVENT PLAN
+================================================= */
+
+function generatePlan() {
+
+
+    const eventName =
+        document
+        .getElementById("eventName")
+        .value
+        .trim();
+
+
+    const start =
+        document
+        .getElementById("startLocation")
+        .value;
+
+
+    const destination =
+        document
+        .getElementById("destination")
+        .value;
+
+
+    const crowd =
+        document
+        .getElementById("crowd")
+        .value;
+
+
+    const time =
+        document
+        .getElementById("eventTime")
+        .value;
+
+
+    if (
+        !eventName ||
+        !start ||
+        !destination ||
+        !crowd
+    ) {
+
+        alert(
+            "Please fill Event Name, Start, Destination and Crowd."
+        );
+
+        return;
+
+    }
+
+
+    /* ==============================
+       RISK
+    ============================== */
+
+    let risk = "MEDIUM";
+
+    let riskColor = "#ffb52e";
+
+
+    if (crowd === "high") {
+
+        risk = "HIGH";
+        riskColor = "#ff4b4b";
+
+    }
+
+    if (crowd === "critical") {
+
+        risk = "CRITICAL";
+        riskColor = "#ff3131";
+
+    }
+
+    if (crowd === "low") {
+
+        risk = "LOW";
+        riskColor = "#00f59b";
+
+    }
+
+
+    const riskLevel =
+        document.getElementById(
+            "riskLevel"
+        );
+
+
+    riskLevel.innerText =
+        risk;
+
+    riskLevel.style.color =
+        riskColor;
+
+
+    riskLevel.style.background =
+        risk === "LOW"
+        ? "rgba(0,245,155,.10)"
+        : "rgba(255,70,70,.12)";
+
+
+    document.getElementById(
+        "riskText"
+    ).innerText =
+
+        `${risk} traffic impact expected because of the selected crowd level and event corridor.`;
+
+
+    /* ==============================
+       CREATE PLAN
+    ============================== */
+
+    const plan =
+        document.getElementById(
+            "planContent"
+        );
+
+
+    plan.innerHTML = `
+
+        <div class="route-box">
+
+            <h4>
+                🛣️ RECOMMENDED EVENT CORRIDOR
+            </h4>
+
+
+            <div class="route">
+
+                <span class="route-point">
+                    ${start}
+                </span>
+
+                <span class="arrow">
+                    →
+                </span>
+
+                <span class="route-point">
+                    RBI Square
+                </span>
+
+                <span class="arrow">
+                    →
+                </span>
+
+                <span class="route-point">
+                    Variety Square
+                </span>
+
+                <span class="arrow">
+                    →
+                </span>
+
+                <span class="route-point">
+                    ${destination}
+                </span>
+
+            </div>
+
+
+            <div class="emergency-corridor">
+
+                <strong>
+                    🚑 Emergency Corridor
+                </strong>
+
+                <p>
+
+                    Keep an alternative emergency
+                    corridor available around the
+                    event route.
+
+                    Traffic operators should monitor
+                    affected junctions and coordinate
+                    authorized response.
+
+                </p>
+
+            </div>
+
+
+            <div class="impact-grid">
+
+                <div class="impact">
+
+                    <b>4</b>
+
+                    <small>
+                        Affected Junctions
+                    </small>
+
+                </div>
+
+
+                <div class="impact">
+
+                    <b>
+                        ${risk}
+                    </b>
+
+                    <small>
+                        Traffic Risk
+                    </small>
+
+                </div>
+
+
+                <div class="impact">
+
+                    <b>
+                        2
+                    </b>
+
+                    <small>
+                        Diversion Options
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div style="
+                margin-top:18px;
+                color:#9fb2c0;
+                font-size:11px;
+                line-height:1.7;
+            ">
+
+                <b style="color:#00d9ff;">
+                    🤖 AI Recommendations
+                </b>
+
+                <br><br>
+
+                • Monitor RBI Square and Variety Square.
+
+                <br>
+
+                • Prepare an alternate diversion route.
+
+                <br>
+
+                • Keep emergency access available.
+
+                <br>
+
+                • Increase operator monitoring during peak crowd period.
+
+                ${time
+                    ? `<br><br>⏱ Event time: <b>${time}</b>`
+                    : ""
+                }
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    /* EVENT STATUS */
+
+    const status =
+        document.getElementById(
+            "eventStatus"
+        );
+
+
+    status.style.display =
+        "block";
+
+
+    status.innerHTML = `
+
+        ✓ Event plan generated.
+
+        <br>
+
+        <b>${eventName}</b>
+
+        <br>
+
+        Route:
+        ${start}
+        →
+        ${destination}
+
+        <br>
+
+        Risk:
+        <b>${risk}</b>
+
+    `;
+
+
+    /* SAVE FOR DEMO */
+
+    const eventData = {
+
+        name:
+            eventName,
+
+        start:
+            start,
+
+        destination:
+            destination,
+
+        crowd:
+            crowd,
+
+        time:
+            time,
+
+        risk:
+            risk
+
+    };
+
+
+    localStorage.setItem(
+        "nagpurEvent",
+        JSON.stringify(
+            eventData
+        )
+    );
+
+}
+
+
+</script>
+
+
+    <script src="JS/app.js"></script>
+
+</body>
+
+</html>

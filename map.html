@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Nagpur AI | Live Traffic Map</title>
+
+    <link rel="stylesheet" href="CSS/map.css">
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+</head>
+
+<body>
+
+<header class="map-navbar">
+
+    <div class="brand">
+        🚦
+        <div>
+            <strong>NAGPUR AI</strong>
+            <small>TRAFFIC COMMAND CENTER</small>
+        </div>
+    </div>
+
+    <div class="live">
+        <span></span>
+        SYSTEM LIVE
+    </div>
+
+    <a href="index.html" class="home-btn">
+        ← Home
+    </a>
+
+</header>
+
+
+<div class="map-layout">
+
+    <!-- LEFT PANEL -->
+
+    <aside class="control-panel">
+
+        <div class="panel-title">
+            <span>LIVE TRAFFIC</span>
+            <h2>Nagpur Network</h2>
+        </div>
+
+
+        <!-- SEARCH -->
+
+        <div class="search-box">
+
+            🔍
+
+            <input
+                type="text"
+                id="mapSearch"
+                placeholder="Search junction..."
+            >
+
+            <button onclick="searchJunction()">
+                Search
+            </button>
+
+        </div>
+
+
+        <!-- ZONES -->
+
+        <h4>TRAFFIC ZONES</h4>
+
+        <div class="zone-buttons">
+
+            <button onclick="filterZone('All')">
+                All Nagpur
+            </button>
+
+            <button onclick="filterZone('Central / Core')">
+                Central / Core
+            </button>
+
+            <button onclick="filterZone('South Nagpur')">
+                South
+            </button>
+
+            <button onclick="filterZone('East Nagpur')">
+                East
+            </button>
+
+            <button onclick="filterZone('North / North-West')">
+                North / NW
+            </button>
+
+            <button onclick="filterZone('West Nagpur')">
+                West
+            </button>
+
+        </div>
+
+
+        <!-- STATUS -->
+
+        <h4>TRAFFIC STATUS</h4>
+
+        <div class="status-list">
+
+            <div>
+                <i class="red"></i>
+                High Traffic
+            </div>
+
+            <div>
+                <i class="yellow"></i>
+                Medium Traffic
+            </div>
+
+            <div>
+                <i class="green"></i>
+                Low Traffic
+            </div>
+
+        </div>
+
+
+        <!-- SUMMARY -->
+
+        <div class="summary">
+
+            <div>
+                <span>JUNCTIONS</span>
+                <strong id="junctionCount">0</strong>
+            </div>
+
+            <div>
+                <span>HIGH TRAFFIC</span>
+                <strong id="highCount">0</strong>
+            </div>
+
+        </div>
+
+
+        <!-- SELECTED JUNCTION -->
+
+        <div id="junctionDetails" class="junction-details">
+
+            <small>SELECT A JUNCTION</small>
+
+            <h3>
+                Nagpur Traffic Network
+            </h3>
+
+            <p>
+                Click any traffic marker on the map
+                to view junction intelligence.
+            </p>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAP -->
+
+    <main class="map-area">
+
+        <div id="map"></div>
+
+
+        <!-- MAP TOP BAR -->
+
+        <div class="map-info">
+
+            <div>
+                <span>NETWORK</span>
+                <strong>NAGPUR CITY</strong>
+            </div>
+
+            <div>
+                <span>LAST UPDATE</span>
+                <strong id="mapTime">--:--:--</strong>
+            </div>
+
+        </div>
+
+
+        <!-- AI PANEL -->
+
+        <div class="ai-panel">
+
+            <div class="ai-title">
+                🤖
+                <div>
+                    <strong>AI TRAFFIC ENGINE</strong>
+                    <small>Decision Support</small>
+                </div>
+            </div>
+
+            <p id="aiMessage">
+                Monitoring Nagpur traffic network...
+            </p>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+
+<script src="JS/map.js"></script>
+
+    <script src="JS/app.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Nagpur AI | Login</title>
+
+    <link rel="stylesheet" href="CSS/login.css">
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <!-- LOGO -->
+    <div class="logo">
+        🚦
+    </div>
+
+    <h1>NAGPUR <span>AI</span></h1>
+
+    <p class="subtitle">
+        TRAFFIC COMMAND CENTER
+    </p>
+
+
+    <!-- ROLE SELECTION -->
+    <div class="role-title">
+        Select Account Type
+    </div>
+
+    <div class="roles">
+
+        <button class="role active"
+                id="publicRole"
+                onclick="selectRole('public')">
+
+            👤
+            <span>Public User</span>
+
+        </button>
+
+
+        <button class="role"
+                id="policeRole"
+                onclick="selectRole('police')">
+
+            👮
+            <span>Traffic Police</span>
+
+        </button>
+
+    </div>
+
+
+    <!-- LOGIN FORM -->
+    <div id="loginSection">
+
+        <h2>Welcome Back</h2>
+
+        <p class="small">
+            Sign in to continue
+        </p>
+
+
+        <label>Name</label>
+
+        <input
+            type="text"
+            id="name"
+            placeholder="Enter your name">
+
+
+        <label>Email / Mobile</label>
+
+        <input
+            type="text"
+            id="contact"
+            placeholder="Email or mobile number">
+
+
+        <label>Password</label>
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Enter password">
+
+
+        <button class="main-btn"
+                onclick="sendOTP()">
+
+            SEND OTP
+        </button>
+
+    </div>
+
+
+    <!-- OTP -->
+    <div id="otpSection" class="hidden">
+
+        <h2>Verify OTP</h2>
+
+        <p class="small">
+            Enter the 6-digit OTP
+        </p>
+
+        <input
+            type="text"
+            id="otp"
+            maxlength="6"
+            placeholder="Enter OTP">
+
+
+        <button class="main-btn"
+                onclick="verifyOTP()">
+
+            VERIFY & LOGIN
+        </button>
+
+
+        <button class="back-btn"
+                onclick="backToLogin()">
+
+            ← Change details
+
+        </button>
+
+    </div>
+
+
+    <!-- SIGN UP ONLY PUBLIC -->
+    <div id="signupArea">
+
+        <p>
+            Don't have an account?
+        </p>
+
+        <button class="signup-btn"
+                onclick="showSignup()">
+
+            SIGN UP
+
+        </button>
+
+    </div>
+
+
+    <!-- SIGNUP FORM -->
+    <div id="signupSection" class="hidden">
+
+        <h2>Create Account</h2>
+
+        <p class="small">
+            Public user registration
+        </p>
+
+
+        <label>First Name</label>
+
+        <input
+            type="text"
+            id="signupName"
+            placeholder="First name">
+
+
+        <label>Email / Mobile</label>
+
+        <input
+            type="text"
+            id="signupContact"
+            placeholder="Email or mobile">
+
+
+        <label>Password</label>
+
+        <input
+            type="password"
+            id="signupPassword"
+            placeholder="Create password">
+
+
+        <button class="main-btn"
+                onclick="createAccount()">
+
+            CREATE ACCOUNT
+
+        </button>
+
+
+        <p class="signin-text">
+            Already have an account?
+        </p>
+
+        <button class="signup-btn"
+                onclick="backToLogin()">
+
+            SIGN IN
+
+        </button>
+
+    </div>
+
+
+    <!-- POLICE NOTE -->
+    <div id="policeNote" class="hidden police-note">
+
+        🛡️ <b>Authorized Traffic Personnel</b>
+
+        <br>
+
+        Police accounts are created by the
+        authorized traffic administration.
+
+    </div>
+
+
+    <a href="index.html"
+       class="home-link">
+
+        ← Back to Home
+
+    </a>
+
+</div>
+
+
+<script type="module" src="JS/firebase.js"></script>
+    <script src="JS/login.js"></script>
+
+    <script src="JS/app.js"></script>
+
+</body>
+</html>

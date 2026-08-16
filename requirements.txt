@@ -1,0 +1,4 @@
+# Core website server uses only Python's standard library.
+# Optional real YOLO inference:
+ultralytics>=8.3.0
+opencv-python>=4.10.0

@@ -1,0 +1,333 @@
+{
+  "city": "Nagpur",
+  "state": "Maharashtra",
+  "junctions": [
+    { 
+      "id": "NG-C-001",
+      "zone": "Central / Core",
+      "name": "Zero Mile",
+      "status": "medium"
+    },
+    {
+      "id": "NG-C-002",
+      "zone": "Central / Core",
+      "name": "Variety Square",
+      "status": "medium"
+    },
+    {
+      "id": "NG-C-003",
+      "zone": "Central / Core",
+      "name": "RBI Square",
+      "status": "high"
+    },
+    {
+      "id": "NG-C-004",
+      "zone": "Central / Core",
+      "name": "LIC Square",
+      "status": "high"
+    },
+    {
+      "id": "NG-C-005",
+      "zone": "Central / Core",
+      "name": "Lokmat Square",
+      "status": "high"
+    },
+    {
+      "id": "NG-C-006",
+      "zone": "Central / Core",
+      "name": "Jhansi Rani Square",
+      "status": "medium"
+    },
+    {
+      "id": "NG-C-007",
+      "zone": "Central / Core",
+      "name": "GPO Square",
+      "status": "medium"
+    },
+    {
+      "id": "NG-C-008",
+      "zone": "Central / Core",
+      "name": "Kasturchand Park area",
+      "status": "medium"
+    },
+    {
+      "id": "NG-C-009",
+      "zone": "Central / Core",
+      "name": "VCA Square",
+      "status": "medium"
+    },
+    {
+      "id": "NG-C-010",
+      "zone": "Central / Core",
+      "name": "Dharampeth Y-Point",
+      "status": "high"
+    },
+    {
+      "id": "NG-C-011",
+      "zone": "Central / Core",
+      "name": "Bhole Petrol Pump Square",
+      "status": "high"
+    },
+    {
+      "id": "NG-C-012",
+      "zone": "Central / Core",
+      "name": "Ladies Club Square",
+      "status": "medium"
+    },
+    {
+      "id": "NG-C-013",
+      "zone": "Central / Core",
+      "name": "Mohd. Rafi Square",
+      "status": "medium"
+    },
+    {
+      "id": "NG-C-014",
+      "zone": "Central / Core",
+      "name": "Hislop College Square",
+      "status": "medium"
+    },
+
+    {
+      "id": "NG-S-001",
+      "zone": "South Nagpur",
+      "name": "Ajni Chowk",
+      "status": "high"
+    },
+    {
+      "id": "NG-S-002",
+      "zone": "South Nagpur",
+      "name": "Medical Square",
+      "status": "high"
+    },
+    {
+      "id": "NG-S-003",
+      "zone": "South Nagpur",
+      "name": "Manewada Chowk",
+      "status": "high"
+    },
+    {
+      "id": "NG-S-004",
+      "zone": "South Nagpur",
+      "name": "Tukdoji Putla",
+      "status": "medium"
+    },
+    {
+      "id": "NG-S-005",
+      "zone": "South Nagpur",
+      "name": "Dhantoli Police Station Chowk",
+      "status": "medium"
+    },
+    {
+      "id": "NG-S-006",
+      "zone": "South Nagpur",
+      "name": "Khamla Chowk",
+      "status": "high"
+    },
+    {
+      "id": "NG-S-007",
+      "zone": "South Nagpur",
+      "name": "Deo Nagar Chowk",
+      "status": "high"
+    },
+    {
+      "id": "NG-S-008",
+      "zone": "South Nagpur",
+      "name": "Vivekanand Nagar Chowk",
+      "status": "medium"
+    },
+    {
+      "id": "NG-S-009",
+      "zone": "South Nagpur",
+      "name": "Chhatrapati Square",
+      "status": "high"
+    },
+    {
+      "id": "NG-S-010",
+      "zone": "South Nagpur",
+      "name": "Wardha Road junctions",
+      "status": "high"
+    },
+    {
+      "id": "NG-S-011",
+      "zone": "South Nagpur",
+      "name": "Airport-side junctions",
+      "status": "medium"
+    },
+
+    {
+      "id": "NG-E-001",
+      "zone": "East Nagpur",
+      "name": "Bajaj Nagar Square",
+      "status": "high"
+    },
+    {
+      "id": "NG-E-002",
+      "zone": "East Nagpur",
+      "name": "Sakkardara Square",
+      "status": "high"
+    },
+    {
+      "id": "NG-E-003",
+      "zone": "East Nagpur",
+      "name": "Hasanbagh Square",
+      "status": "medium"
+    },
+    {
+      "id": "NG-E-004",
+      "zone": "East Nagpur",
+      "name": "Gurudev Nagar Square",
+      "status": "medium"
+    },
+    {
+      "id": "NG-E-005",
+      "zone": "East Nagpur",
+      "name": "Wathoda Square",
+      "status": "high"
+    },
+    {
+      "id": "NG-E-006",
+      "zone": "East Nagpur",
+      "name": "Kalamna-side junctions",
+      "status": "high"
+    },
+    {
+      "id": "NG-E-007",
+      "zone": "East Nagpur",
+      "name": "Pardi Naka",
+      "status": "high"
+    },
+    {
+      "id": "NG-E-008",
+      "zone": "East Nagpur",
+      "name": "Wardhaman Nagar Power House Chowk",
+      "status": "medium"
+    },
+    {
+      "id": "NG-E-009",
+      "zone": "East Nagpur",
+      "name": "Prajapati Chowk",
+      "status": "medium"
+    },
+
+    {
+      "id": "NG-N-001",
+      "zone": "North / North-West",
+      "name": "Indora Chowk",
+      "status": "high"
+    },
+    {
+      "id": "NG-N-002",
+      "zone": "North / North-West",
+      "name": "Kadbi Chowk",
+      "status": "high"
+    },
+    {
+      "id": "NG-N-003",
+      "zone": "North / North-West",
+      "name": "Automotive Chowk",
+      "status": "high"
+    },
+    {
+      "id": "NG-N-004",
+      "zone": "North / North-West",
+      "name": "Gaddi Godam Chowk",
+      "status": "high"
+    },
+    {
+      "id": "NG-N-005",
+      "zone": "North / North-West",
+      "name": "Golibar Chowk",
+      "status": "medium"
+    },
+    {
+      "id": "NG-N-006",
+      "zone": "North / North-West",
+      "name": "Mental Hospital Chowk",
+      "status": "high"
+    },
+    {
+      "id": "NG-N-007",
+      "zone": "North / North-West",
+      "name": "Rani Durgawati Chowk",
+      "status": "medium"
+    },
+    {
+      "id": "NG-N-008",
+      "zone": "North / North-West",
+      "name": "Sai Mandir Square",
+      "status": "medium"
+    },
+    {
+      "id": "NG-N-009",
+      "zone": "North / North-West",
+      "name": "Kamptee Road junctions",
+      "status": "high"
+    },
+
+    {
+      "id": "NG-W-001",
+      "zone": "West Nagpur",
+      "name": "Law College Square",
+      "status": "high"
+    },
+    {
+      "id": "NG-W-002",
+      "zone": "West Nagpur",
+      "name": "Ambazari Road junctions",
+      "status": "medium"
+    },
+    {
+      "id": "NG-W-003",
+      "zone": "West Nagpur",
+      "name": "Ravi Nagar area",
+      "status": "medium"
+    },
+    {
+      "id": "NG-W-004",
+      "zone": "West Nagpur",
+      "name": "Dharampeth",
+      "status": "high"
+    },
+    {
+      "id": "NG-W-005",
+      "zone": "West Nagpur",
+      "name": "Shankar Nagar",
+      "status": "high"
+    },
+    {
+      "id": "NG-W-006",
+      "zone": "West Nagpur",
+      "name": "Hingna Road junctions",
+      "status": "high"
+    },
+    {
+      "id": "NG-W-007",
+      "zone": "West Nagpur",
+      "name": "Jaitala Bazar Chowk",
+      "status": "medium"
+    },
+    {
+      "id": "NG-W-008",
+      "zone": "West Nagpur",
+      "name": "CRPF Gate area",
+      "status": "medium"
+    }
+  ],
+
+  "main_routes": [
+    "Wardha Road",
+    "Amravati Road",
+    "Hingna Road",
+    "Manewada Road",
+    "Central Avenue",
+    "Kamptee Road",
+    "Nag Road",
+    "Pachpavli Road",
+    "Ghat Road",
+    "Ajni Road → Medical Square",
+    "Railway Station Road",
+    "Subhash Road",
+    "Ayachit Road",
+    "Ambazari Road"
+  ]
+}

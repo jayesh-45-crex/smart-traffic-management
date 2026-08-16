@@ -1,0 +1,402 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+
+    font-family: Arial, sans-serif;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            rgba(3, 12, 25, 0.90),
+            rgba(3, 12, 25, 0.94)
+        ),
+        url("https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=2000&q=80");
+
+    background-size: cover;
+    background-position: center;
+
+    padding: 20px;
+}
+
+
+/* MAIN CARD */
+
+.login-container {
+
+    width: 430px;
+
+    padding: 35px;
+
+    border-radius: 20px;
+
+    background: rgba(7, 20, 38, 0.92);
+
+    border: 1px solid rgba(0, 210, 255, 0.25);
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,0.6);
+
+    text-align: center;
+}
+
+
+/* LOGO */
+
+.logo {
+
+    width: 65px;
+    height: 65px;
+
+    margin: auto;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    font-size: 32px;
+
+    border-radius: 18px;
+
+    background: #071d32;
+
+    border: 1px solid #00d9ff;
+
+    box-shadow:
+        0 0 25px rgba(0,217,255,0.2);
+}
+
+
+h1 {
+
+    margin-top: 15px;
+
+    font-size: 27px;
+
+    letter-spacing: 2px;
+}
+
+h1 span {
+    color: #00ddff;
+}
+
+
+.subtitle {
+
+    font-size: 10px;
+
+    letter-spacing: 3px;
+
+    color: #8295aa;
+
+    margin-top: 5px;
+}
+
+
+/* ROLE */
+
+.role-title {
+
+    margin-top: 30px;
+
+    margin-bottom: 10px;
+
+    font-size: 13px;
+
+    color: #aebccc;
+}
+
+
+.roles {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+}
+
+
+.role {
+
+    height: 75px;
+
+    border-radius: 12px;
+
+    border: 1px solid #273b52;
+
+    background: #09192d;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 25px;
+
+    transition: .2s;
+}
+
+
+.role span {
+
+    display: block;
+
+    margin-top: 5px;
+
+    font-size: 11px;
+
+    color: #aab8c8;
+}
+
+
+.role:hover,
+.role.active {
+
+    border-color: #00d9ff;
+
+    background: #09283b;
+
+    box-shadow:
+        0 0 15px rgba(0,217,255,.12);
+}
+
+
+/* FORM */
+
+h2 {
+
+    margin-top: 25px;
+
+    font-size: 21px;
+}
+
+
+.small {
+
+    color: #77899d;
+
+    font-size: 11px;
+
+    margin-top: 6px;
+
+    margin-bottom: 20px;
+}
+
+
+label {
+
+    display: block;
+
+    text-align: left;
+
+    margin-top: 12px;
+
+    margin-bottom: 6px;
+
+    font-size: 11px;
+
+    color: #aebccc;
+}
+
+
+input {
+
+    width: 100%;
+
+    height: 45px;
+
+    padding: 0 13px;
+
+    border-radius: 8px;
+
+    border: 1px solid #263b53;
+
+    background: #051322;
+
+    color: white;
+
+    outline: none;
+
+    font-size: 13px;
+}
+
+
+input:focus {
+
+    border-color: #00d9ff;
+
+    box-shadow:
+        0 0 10px rgba(0,217,255,.08);
+}
+
+
+input::placeholder {
+    color: #627388;
+}
+
+
+/* MAIN BUTTON */
+
+.main-btn {
+
+    width: 100%;
+
+    height: 46px;
+
+    margin-top: 20px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #007cff,
+            #00cbd9
+        );
+
+    color: white;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+
+.main-btn:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.3);
+}
+
+
+/* SIGN UP */
+
+#signupArea {
+
+    margin-top: 22px;
+
+    padding-top: 18px;
+
+    border-top: 1px solid #1d3045;
+
+    color: #8291a3;
+
+    font-size: 11px;
+}
+
+
+.signup-btn {
+
+    margin-top: 7px;
+
+    border: none;
+
+    background: none;
+
+    color: #00d9ff;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+/* BACK */
+
+.back-btn {
+
+    margin-top: 15px;
+
+    border: none;
+
+    background: none;
+
+    color: #8091a5;
+
+    cursor: pointer;
+
+    font-size: 11px;
+}
+
+
+/* POLICE */
+
+.police-note {
+
+    margin-top: 20px;
+
+    padding: 12px;
+
+    border-radius: 9px;
+
+    background: rgba(0,130,255,.08);
+
+    border: 1px solid rgba(0,180,255,.18);
+
+    color: #8fa7bf;
+
+    font-size: 10px;
+
+    line-height: 1.6;
+}
+
+
+/* HOME */
+
+.home-link {
+
+    display: block;
+
+    margin-top: 25px;
+
+    color: #00d9ff;
+
+    text-decoration: none;
+
+    font-size: 11px;
+}
+
+
+.hidden {
+    display: none;
+}
+
+
+.signin-text {
+
+    margin-top: 18px;
+
+    color: #8291a3;
+
+    font-size: 11px;
+}
+
+
+/* MOBILE */
+
+@media(max-width:500px) {
+
+    .login-container {
+
+        width: 100%;
+
+        padding: 25px 20px;
+    }
+
+}

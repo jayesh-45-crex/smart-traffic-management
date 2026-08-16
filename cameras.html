@@ -1,0 +1,2825 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Nagpur AI | Live Camera Network</title>
+
+<style>
+
+/* =========================
+   BASIC
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#040b13;
+    color:#ffffff;
+    min-height:100vh;
+}
+
+button,
+input,
+select{
+    font-family:inherit;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+    height:72px;
+    padding:0 30px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    background:#071522;
+
+    border-bottom:1px solid #1b3447;
+
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo{
+    width:44px;
+    height:44px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:11px;
+
+    background:#092638;
+
+    border:1px solid #00d9ff;
+
+    font-size:22px;
+}
+
+.brand h1{
+    font-size:19px;
+    letter-spacing:.5px;
+}
+
+.brand h1 span{
+    color:#00d9ff;
+}
+
+.brand small{
+    display:block;
+
+    margin-top:3px;
+
+    color:#71879a;
+
+    font-size:9px;
+
+    letter-spacing:2px;
+}
+
+.header-status{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    color:#00f59b;
+
+    font-size:11px;
+    font-weight:bold;
+}
+
+.live-dot{
+    width:8px;
+    height:8px;
+
+    border-radius:50%;
+
+    background:#00f59b;
+
+    box-shadow:
+        0 0 10px #00f59b;
+
+    animation:blink 1s infinite;
+}
+
+@keyframes blink{
+    50%{
+        opacity:.35;
+    }
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+.container{
+    max-width:1450px;
+
+    margin:auto;
+
+    padding:30px;
+}
+
+.page-heading{
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-end;
+
+    gap:20px;
+}
+
+.page-heading h2{
+    font-size:28px;
+}
+
+.page-heading p{
+    margin-top:7px;
+
+    color:#71879a;
+
+    font-size:13px;
+}
+
+.network-status{
+    padding:9px 13px;
+
+    border-radius:7px;
+
+    background:#061d1a;
+
+    border:1px solid #0a6650;
+
+    color:#00f59b;
+
+    font-size:10px;
+
+    white-space:nowrap;
+}
+
+
+/* =========================
+   CONTROLS
+========================= */
+
+.controls{
+    margin-top:25px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:15px;
+
+    flex-wrap:wrap;
+}
+
+.search-box{
+    display:flex;
+
+    gap:8px;
+}
+
+.search-box input{
+    width:280px;
+
+    padding:12px 14px;
+
+    background:#071522;
+
+    color:#fff;
+
+    border:1px solid #29465d;
+
+    border-radius:7px;
+
+    outline:none;
+}
+
+.search-box input:focus{
+    border-color:#00d9ff;
+}
+
+.search-box button{
+    padding:12px 18px;
+
+    background:#007fac;
+
+    color:#fff;
+
+    border:0;
+
+    border-radius:7px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+}
+
+.search-box button:hover{
+    background:#009bcf;
+}
+
+.filter{
+    padding:11px 15px;
+
+    background:#071522;
+
+    color:#fff;
+
+    border:1px solid #29465d;
+
+    border-radius:7px;
+
+    outline:none;
+}
+
+
+/* =========================
+   CAMERA GRID
+========================= */
+
+.camera-grid{
+    margin-top:25px;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:22px;
+}
+
+
+/* =========================
+   CAMERA CARD
+========================= */
+
+.camera-card{
+
+    background:#071522;
+
+    border:1px solid #1b3548;
+
+    border-radius:14px;
+
+    overflow:hidden;
+
+    transition:.25s;
+}
+
+.camera-card:hover{
+
+    border-color:#00d9ff;
+
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.35);
+}
+
+
+/* =========================
+   CAMERA SCREEN
+========================= */
+
+.camera-screen{
+
+    height:300px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            #183746,
+            #0d202b 48%,
+            #18252b 49%,
+            #0c1115
+        );
+}
+
+
+/* SKY LIGHT */
+
+.camera-screen::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:0;
+    right:0;
+
+    height:48%;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(42,82,98,.7),
+            rgba(15,36,47,.4)
+        );
+}
+
+
+/* =========================
+   BUILDINGS
+========================= */
+
+.building{
+
+    position:absolute;
+
+    bottom:112px;
+
+    background:#142b36;
+
+    border:1px solid #27424e;
+
+    opacity:.95;
+}
+
+.b1{
+    left:3%;
+    width:80px;
+    height:85px;
+}
+
+.b2{
+    left:18%;
+    width:65px;
+    height:125px;
+}
+
+.b3{
+    right:19%;
+    width:75px;
+    height:100px;
+}
+
+.b4{
+    right:3%;
+    width:95px;
+    height:140px;
+}
+
+
+/* WINDOWS */
+
+.building::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:10px;
+
+    background:
+        repeating-linear-gradient(
+            90deg,
+            transparent 0 12px,
+            rgba(220,190,90,.22) 12px 17px
+        ),
+
+        repeating-linear-gradient(
+            0deg,
+            transparent 0 13px,
+            rgba(220,190,90,.18) 13px 18px
+        );
+}
+
+
+/* =========================
+   ROAD - PERSPECTIVE
+========================= */
+
+.road{
+
+    position:absolute;
+
+    left:7%;
+    right:-7%;
+
+    bottom:-25px;
+
+    height:175px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #111a1e,
+            #2b3438 48%,
+            #151d21
+        );
+
+    transform:
+        perspective(330px)
+        rotateX(17deg)
+        rotateZ(-5deg);
+
+    border-top:2px solid #53626a;
+
+    box-shadow:
+        0 -15px 35px rgba(0,0,0,.45);
+}
+
+
+/* CENTER ROAD MARKING */
+
+.road::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:47%;
+
+    top:-10px;
+
+    width:5px;
+
+    height:210px;
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            #e8d75d 0 24px,
+            transparent 24px 47px
+        );
+
+    transform:skewX(-7deg);
+}
+
+
+/* SIDE ROAD MARKING */
+
+.road::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:12%;
+    right:10%;
+
+    top:34%;
+
+    height:3px;
+
+    background:#d9d9d9;
+
+    opacity:.45;
+
+    transform:rotate(-7deg);
+}
+
+
+/* =========================
+   VEHICLES
+========================= */
+
+.vehicle{
+
+    position:absolute;
+
+    bottom:68px;
+
+    left:-70px;
+
+    width:44px;
+
+    height:23px;
+
+    background:#d64141;
+
+    border-radius:6px 6px 4px 4px;
+
+    box-shadow:
+        0 5px 9px rgba(0,0,0,.6);
+
+    animation:
+        drive 7s linear infinite;
+
+    z-index:8;
+}
+
+
+/* CAR WINDOW */
+
+.vehicle::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:11px;
+    top:-8px;
+
+    width:22px;
+    height:10px;
+
+    background:#8eafbd;
+
+    border-radius:5px 5px 2px 2px;
+
+    border:1px solid #b8d0d9;
+}
+
+
+/* CAR WHEELS */
+
+.vehicle::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:5px;
+    bottom:-7px;
+
+    width:9px;
+    height:9px;
+
+    background:#050505;
+
+    border-radius:50%;
+
+    box-shadow:
+        25px 0 #050505;
+}
+
+
+/* BLUE CAR */
+
+.v2{
+
+    background:#287fc0;
+
+    bottom:91px;
+
+    transform:scale(.78);
+
+    animation-duration:8s;
+
+    animation-delay:1s;
+}
+
+
+/* AUTO */
+
+.v3{
+
+    width:35px;
+
+    height:28px;
+
+    background:#e3a92d;
+
+    bottom:53px;
+
+    border-radius:8px 8px 3px 3px;
+
+    animation-duration:9s;
+
+    animation-delay:2s;
+}
+
+.v3::before{
+
+    width:22px;
+
+    height:11px;
+
+    left:7px;
+
+    background:#334f59;
+}
+
+
+/* BUS */
+
+.v4{
+
+    width:59px;
+
+    height:32px;
+
+    bottom:102px;
+
+    background:#c94f38;
+
+    border-radius:5px;
+
+    animation-duration:10s;
+
+    animation-delay:3s;
+}
+
+.v4::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:6px;
+    right:6px;
+
+    top:5px;
+
+    height:11px;
+
+    background:
+        repeating-linear-gradient(
+            90deg,
+            #90b8c7 0 9px,
+            #243b45 9px 12px
+        );
+
+    border-radius:2px;
+}
+
+
+/* BIKE */
+
+.v5{
+
+    width:15px;
+
+    height:10px;
+
+    bottom:77px;
+
+    background:#151515;
+
+    border-radius:50%;
+
+    animation-duration:6s;
+
+    animation-delay:1s;
+}
+
+.v5::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:-3px;
+
+    top:6px;
+
+    width:7px;
+
+    height:7px;
+
+    border-radius:50%;
+
+    background:#020202;
+
+    box-shadow:
+        18px 0 #020202;
+}
+
+@keyframes drive{
+
+    0%{
+        left:-80px;
+    }
+
+    100%{
+        left:110%;
+    }
+}
+
+
+/* =========================
+   CCTV TOP
+========================= */
+
+.camera-top{
+
+    position:absolute;
+
+    top:12px;
+
+    left:12px;
+    right:12px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    z-index:20;
+}
+
+.camera-id{
+
+    padding:6px 9px;
+
+    background:
+        rgba(0,0,0,.7);
+
+    border-radius:5px;
+
+    font-family:monospace;
+
+    font-size:10px;
+}
+
+.live-badge{
+
+    padding:6px 9px;
+
+    background:#b92e34;
+
+    border-radius:5px;
+
+    font-family:monospace;
+
+    font-size:9px;
+
+    font-weight:bold;
+}
+
+
+/* =========================
+   CCTV BOTTOM INFO
+========================= */
+
+.cctv-info{
+
+    position:absolute;
+
+    left:12px;
+    right:12px;
+
+    bottom:12px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    z-index:20;
+
+    font-family:monospace;
+
+    font-size:9px;
+
+    color:#e0edf2;
+
+    text-shadow:
+        0 1px 4px #000;
+}
+
+.cctv-info .rec{
+    color:#ff4b4b;
+}
+
+
+/* =========================
+   AI SCANNING LINE
+========================= */
+
+.scan{
+
+    position:absolute;
+
+    left:0;
+    right:0;
+
+    height:2px;
+
+    background:#00f59b;
+
+    box-shadow:
+        0 0 12px #00f59b;
+
+    top:25%;
+
+    z-index:15;
+
+    opacity:.8;
+
+    animation:
+        scanLine 3.2s linear infinite;
+}
+
+@keyframes scanLine{
+
+    0%{
+        top:20%;
+    }
+
+    50%{
+        top:82%;
+    }
+
+    100%{
+        top:20%;
+    }
+}
+
+
+/* =========================
+   AI DETECTION BOXES
+========================= */
+
+.ai-box{
+
+    position:absolute;
+
+    border:2px solid #00f59b;
+
+    z-index:14;
+
+    color:#00f59b;
+
+    font-family:monospace;
+
+    font-size:8px;
+
+    padding:2px;
+
+    background:
+        rgba(0,245,155,.04);
+}
+
+.box1{
+
+    width:48px;
+    height:38px;
+
+    left:28%;
+    bottom:80px;
+}
+
+.box2{
+
+    width:55px;
+    height:43px;
+
+    left:58%;
+    bottom:104px;
+}
+
+.box3{
+
+    width:40px;
+    height:34px;
+
+    left:72%;
+    bottom:62px;
+}
+
+
+/* =========================
+   CAMERA INFORMATION
+========================= */
+
+.camera-info{
+
+    padding:18px;
+}
+
+.camera-name{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+}
+
+.camera-name h3{
+
+    font-size:17px;
+}
+
+.camera-online{
+
+    color:#00f59b;
+
+    font-size:9px;
+
+    font-weight:bold;
+}
+
+.location{
+
+    margin-top:5px;
+
+    color:#70879a;
+
+    font-size:11px;
+}
+
+
+/* =========================
+   DETECTION STATS
+========================= */
+
+.detection{
+
+    margin-top:17px;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:7px;
+}
+
+.detect{
+
+    padding:10px 4px;
+
+    text-align:center;
+
+    background:#05111b;
+
+    border:1px solid #173044;
+
+    border-radius:7px;
+}
+
+.detect-icon{
+
+    display:block;
+
+    font-size:15px;
+
+    margin-bottom:3px;
+}
+
+.detect b{
+
+    display:block;
+
+    color:#00d9ff;
+
+    font-size:17px;
+}
+
+.detect small{
+
+    color:#71879a;
+
+    font-size:9px;
+}
+
+
+/* =========================
+   TRAFFIC STATUS
+========================= */
+
+.traffic{
+
+    margin-top:15px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+}
+
+.density{
+
+    color:#758a9d;
+
+    font-size:11px;
+}
+
+.high{
+    color:#ff4b4b;
+    font-size:11px;
+    font-weight:bold;
+}
+
+.medium{
+    color:#ffb52e;
+    font-size:11px;
+    font-weight:bold;
+}
+
+.low{
+    color:#00f59b;
+    font-size:11px;
+    font-weight:bold;
+}
+
+
+/* =========================
+   AI STATUS
+========================= */
+
+.ai-status{
+
+    margin-top:12px;
+
+    padding:10px;
+
+    background:
+        rgba(0,217,255,.04);
+
+    border:
+        1px solid rgba(0,217,255,.14);
+
+    border-radius:6px;
+
+    color:#8196a7;
+
+    font-size:10px;
+}
+
+.ai-status strong{
+
+    color:#00d9ff;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.prototype-note{
+
+    margin-top:25px;
+
+    padding:13px 15px;
+
+    border:1px solid #19364a;
+
+    background:#071522;
+
+    border-radius:8px;
+
+    color:#71879a;
+
+    font-size:10px;
+
+    line-height:1.6;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:900px){
+
+    .camera-grid{
+
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:600px){
+
+    header{
+
+        padding:0 15px;
+    }
+
+    .header-status{
+
+        display:none;
+    }
+
+    .container{
+
+        padding:20px 13px;
+    }
+
+    .page-heading{
+
+        align-items:flex-start;
+
+        flex-direction:column;
+    }
+
+    .search-box{
+
+        width:100%;
+    }
+
+    .search-box input{
+
+        width:100%;
+    }
+
+    .search-box button{
+
+        padding:10px;
+    }
+
+    .camera-screen{
+
+        height:250px;
+    }
+
+}
+
+
+/* =========================
+   NO RESULTS
+========================= */
+
+.no-results{
+
+    display:none;
+
+    grid-column:1/-1;
+
+    padding:50px;
+
+    text-align:center;
+
+    color:#71879a;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+<div class="brand">
+
+<div class="logo">
+📹
+</div>
+
+<div>
+
+<h1>
+NAGPUR <span>AI</span>
+</h1>
+
+<small>
+TRAFFIC CAMERA COMMAND NETWORK
+</small>
+
+</div>
+
+</div>
+
+
+<div class="header-status">
+
+<span class="live-dot"></span>
+
+24 CAMERAS ONLINE
+
+</div>
+
+</header>
+
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="container">
+
+
+<div class="page-heading">
+
+<div>
+
+<h2>
+📹 Live Camera Monitoring
+</h2>
+
+<p>
+AI-assisted traffic observation across
+major Nagpur junctions.
+</p>
+
+</div>
+
+
+<div class="network-status">
+
+● CAMERA NETWORK ONLINE
+
+</div>
+
+</div>
+
+
+
+<!-- ================= CONTROLS ================= -->
+
+<div class="controls">
+
+
+<div class="search-box">
+
+<input
+type="text"
+id="cameraSearch"
+placeholder="Search Nagpur camera...">
+
+<button onclick="searchCamera()">
+SEARCH
+</button>
+
+</div>
+
+
+<select
+class="filter"
+id="trafficFilter"
+onchange="filterTraffic()">
+
+<option value="all">
+All Traffic Levels
+</option>
+
+<option value="high">
+🔴 High Traffic
+</option>
+
+<option value="medium">
+🟠 Medium Traffic
+</option>
+
+<option value="low">
+🟢 Low Traffic
+</option>
+
+</select>
+
+</div>
+
+
+
+<!-- ================= CAMERA GRID ================= -->
+
+<div
+class="camera-grid"
+id="cameraGrid">
+
+
+
+<!-- ==================================================
+     CAMERA 001
+================================================== -->
+
+<div
+class="camera-card"
+data-location="Zero Mile"
+data-traffic="low">
+
+
+<div class="camera-screen">
+
+<div class="building b1"></div>
+<div class="building b2"></div>
+<div class="building b3"></div>
+<div class="building b4"></div>
+
+<div class="road"></div>
+
+
+<div class="vehicle"></div>
+<div class="vehicle v2"></div>
+<div class="vehicle v3"></div>
+<div class="vehicle v4"></div>
+<div class="vehicle v5"></div>
+
+
+<div class="ai-box box1">
+CAR
+</div>
+
+<div class="ai-box box2">
+CAR
+</div>
+
+<div class="ai-box box3">
+BIKE
+</div>
+
+
+<div class="scan"></div>
+
+
+<div class="camera-top">
+
+<span class="camera-id">
+CAM-001
+</span>
+
+<span class="live-badge">
+● REC / LIVE
+</span>
+
+</div>
+
+
+<div class="cctv-info">
+
+<span class="rec">
+● REC
+</span>
+
+<span>
+AI VISION
+</span>
+
+<span class="clock">
+--:--:--
+</span>
+
+</div>
+
+</div>
+
+
+
+<div class="camera-info">
+
+
+<div class="camera-name">
+
+<h3>
+Zero Mile
+</h3>
+
+<span class="camera-online">
+● ONLINE
+</span>
+
+</div>
+
+
+<div class="location">
+Central Nagpur
+</div>
+
+
+<div class="detection">
+
+
+<div class="detect">
+
+<span class="detect-icon">
+🚗
+</span>
+
+<b class="car-count">
+18
+</b>
+
+<small>
+CARS
+</small>
+
+</div>
+
+
+<div class="detect">
+
+<span class="detect-icon">
+🏍️
+</span>
+
+<b class="bike-count">
+31
+</b>
+
+<small>
+BIKES
+</small>
+
+</div>
+
+
+<div class="detect">
+
+<span class="detect-icon">
+🚌
+</span>
+
+<b>
+3
+</b>
+
+<small>
+BUSES
+</small>
+
+</div>
+
+
+<div class="detect">
+
+<span class="detect-icon">
+🛺
+</span>
+
+<b>
+7
+</b>
+
+<small>
+AUTOS
+</small>
+
+</div>
+
+
+</div>
+
+
+<div class="traffic">
+
+<span class="density">
+Traffic Density
+</span>
+
+<span class="low">
+LOW
+</span>
+
+</div>
+
+
+<div class="ai-status">
+
+🤖 <strong>AI:</strong>
+
+Normal traffic flow detected.
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- ==================================================
+     CAMERA 002
+================================================== -->
+
+<div
+class="camera-card"
+data-location="Manewada Chowk"
+data-traffic="high">
+
+
+<div class="camera-screen">
+
+<div class="building b1"></div>
+<div class="building b2"></div>
+<div class="building b3"></div>
+<div class="building b4"></div>
+
+<div class="road"></div>
+
+
+<div class="vehicle"></div>
+<div class="vehicle v2"></div>
+<div class="vehicle v3"></div>
+<div class="vehicle v4"></div>
+<div class="vehicle v5"></div>
+
+
+<div class="ai-box box1">
+CAR
+</div>
+
+<div class="ai-box box2">
+BUS
+</div>
+
+<div class="ai-box box3">
+AUTO
+</div>
+
+
+<div class="scan"></div>
+
+
+<div class="camera-top">
+
+<span class="camera-id">
+CAM-002
+</span>
+
+<span class="live-badge">
+● REC / LIVE
+</span>
+
+</div>
+
+
+<div class="cctv-info">
+
+<span class="rec">
+● REC
+</span>
+
+<span>
+AI VISION
+</span>
+
+<span class="clock">
+--:--:--
+</span>
+
+</div>
+
+</div>
+
+
+
+<div class="camera-info">
+
+<div class="camera-name">
+
+<h3>
+Manewada Chowk
+</h3>
+
+<span class="camera-online">
+● ONLINE
+</span>
+
+</div>
+
+<div class="location">
+South Nagpur
+</div>
+
+
+<div class="detection">
+
+<div class="detect">
+
+<span class="detect-icon">
+🚗
+</span>
+
+<b class="car-count">
+42
+</b>
+
+<small>
+CARS
+</small>
+
+</div>
+
+
+<div class="detect">
+
+<span class="detect-icon">
+🏍️
+</span>
+
+<b class="bike-count">
+67
+</b>
+
+<small>
+BIKES
+</small>
+
+</div>
+
+
+<div class="detect">
+
+<span class="detect-icon">
+🚌
+</span>
+
+<b>
+8
+</b>
+
+<small>
+BUSES
+</small>
+
+</div>
+
+
+<div class="detect">
+
+<span class="detect-icon">
+🛺
+</span>
+
+<b>
+21
+</b>
+
+<small>
+AUTOS
+</small>
+
+</div>
+
+</div>
+
+
+<div class="traffic">
+
+<span class="density">
+Traffic Density
+</span>
+
+<span class="high">
+HIGH
+</span>
+
+</div>
+
+
+<div class="ai-status">
+
+🤖 <strong>AI:</strong>
+
+Congestion detected. Signal adjustment recommended.
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- ==================================================
+     CAMERA 003
+================================================== -->
+
+<div
+class="camera-card"
+data-location="Chhatrapati Square"
+data-traffic="high">
+
+
+<div class="camera-screen">
+
+<div class="building b1"></div>
+<div class="building b2"></div>
+<div class="building b3"></div>
+<div class="building b4"></div>
+
+<div class="road"></div>
+
+
+<div class="vehicle"></div>
+<div class="vehicle v2"></div>
+<div class="vehicle v3"></div>
+<div class="vehicle v4"></div>
+<div class="vehicle v5"></div>
+
+
+<div class="ai-box box1">
+CAR
+</div>
+
+<div class="ai-box box2">
+BIKE
+</div>
+
+<div class="ai-box box3">
+AUTO
+</div>
+
+
+<div class="scan"></div>
+
+
+<div class="camera-top">
+
+<span class="camera-id">
+CAM-003
+</span>
+
+<span class="live-badge">
+● REC / LIVE
+</span>
+
+</div>
+
+
+<div class="cctv-info">
+
+<span class="rec">
+● REC
+</span>
+
+<span>
+AI VISION
+</span>
+
+<span class="clock">
+--:--:--
+</span>
+
+</div>
+
+</div>
+
+
+
+<div class="camera-info">
+
+<div class="camera-name">
+
+<h3>
+Chhatrapati Square
+</h3>
+
+<span class="camera-online">
+● ONLINE
+</span>
+
+</div>
+
+<div class="location">
+South Nagpur
+</div>
+
+
+<div class="detection">
+
+<div class="detect">
+
+<span class="detect-icon">
+🚗
+</span>
+
+<b class="car-count">
+51
+</b>
+
+<small>
+CARS
+</small>
+
+</div>
+
+
+<div class="detect">
+
+<span class="detect-icon">
+🏍️
+</span>
+
+<b class="bike-count">
+82
+</b>
+
+<small>
+BIKES
+</small>
+
+</div>
+
+
+<div class="detect">
+
+<span class="detect-icon">
+🚌
+</span>
+
+<b>
+9
+</b>
+
+<small>
+BUSES
+</small>
+
+</div>
+
+
+<div class="detect">
+
+<span class="detect-icon">
+🛺
+</span>
+
+<b>
+24
+</b>
+
+<small>
+AUTOS
+</small>
+
+</div>
+
+</div>
+
+
+<div class="traffic">
+
+<span class="density">
+Traffic Density
+</span>
+
+<span class="high">
+HIGH
+</span>
+
+</div>
+
+
+<div class="ai-status">
+
+🤖 <strong>AI:</strong>
+
+Heavy vehicle concentration detected.
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- ==================================================
+     CAMERA 004
+================================================== -->
+
+<div
+class="camera-card"
+data-location="Medical Square"
+data-traffic="medium">
+
+
+<div class="camera-screen">
+
+<div class="building b1"></div>
+<div class="building b2"></div>
+<div class="building b3"></div>
+<div class="building b4"></div>
+
+<div class="road"></div>
+
+
+<div class="vehicle"></div>
+<div class="vehicle v2"></div>
+<div class="vehicle v3"></div>
+<div class="vehicle v4"></div>
+<div class="vehicle v5"></div>
+
+
+<div class="ai-box box1">
+CAR
+</div>
+
+<div class="ai-box box2">
+BUS
+</div>
+
+
+<div class="scan"></div>
+
+
+<div class="camera-top">
+
+<span class="camera-id">
+CAM-004
+</span>
+
+<span class="live-badge">
+● REC / LIVE
+</span>
+
+</div>
+
+
+<div class="cctv-info">
+
+<span class="rec">
+● REC
+</span>
+
+<span>
+AI VISION
+</span>
+
+<span class="clock">
+--:--:--
+</span>
+
+</div>
+
+</div>
+
+
+
+<div class="camera-info">
+
+<div class="camera-name">
+
+<h3>
+Medical Square
+</h3>
+
+<span class="camera-online">
+● ONLINE
+</span>
+
+</div>
+
+<div class="location">
+South-Central Nagpur
+</div>
+
+
+<div class="detection">
+
+<div class="detect">
+
+<span class="detect-icon">
+🚗
+</span>
+
+<b class="car-count">
+29
+</b>
+
+<small>
+CARS
+</small>
+
+</div>
+
+
+<div class="detect">
+
+<span class="detect-icon">
+🏍️
+</span>
+
+<b class="bike-count">
+48
+</b>
+
+<small>
+BIKES
+</small>
+
+</div>
+
+
+<div class="detect">
+
+<span class="detect-icon">
+🚌
+</span>
+
+<b>
+5
+</b>
+
+<small>
+BUSES
+</small>
+
+</div>
+
+
+<div class="detect">
+
+<span class="detect-icon">
+🛺
+</span>
+
+<b>
+13
+</b>
+
+<small>
+AUTOS
+</small>
+
+</div>
+
+</div>
+
+
+<div class="traffic">
+
+<span class="density">
+Traffic Density
+</span>
+
+<span class="medium">
+MEDIUM
+</span>
+
+</div>
+
+
+<div class="ai-status">
+
+🤖 <strong>AI:</strong>
+
+Moderate traffic. Normal signal cycle suggested.
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- ==================================================
+     CAMERA 005
+================================================== -->
+
+<div
+class="camera-card"
+data-location="Ajni Chowk"
+data-traffic="high">
+
+
+<div class="camera-screen">
+
+<div class="building b1"></div>
+<div class="building b2"></div>
+<div class="building b3"></div>
+<div class="building b4"></div>
+
+<div class="road"></div>
+
+
+<div class="vehicle"></div>
+<div class="vehicle v2"></div>
+<div class="vehicle v3"></div>
+<div class="vehicle v4"></div>
+<div class="vehicle v5"></div>
+
+
+<div class="ai-box box1">
+CAR
+</div>
+
+<div class="ai-box box2">
+BUS
+</div>
+
+<div class="ai-box box3">
+BIKE
+</div>
+
+
+<div class="scan"></div>
+
+
+<div class="camera-top">
+
+<span class="camera-id">
+CAM-005
+</span>
+
+<span class="live-badge">
+● REC / LIVE
+</span>
+
+</div>
+
+
+<div class="cctv-info">
+
+<span class="rec">
+● REC
+</span>
+
+<span>
+AI VISION
+</span>
+
+<span class="clock">
+--:--:--
+</span>
+
+</div>
+
+</div>
+
+
+
+<div class="camera-info">
+
+<div class="camera-name">
+
+<h3>
+Ajni Chowk
+</h3>
+
+<span class="camera-online">
+● ONLINE
+</span>
+
+</div>
+
+<div class="location">
+South Nagpur
+</div>
+
+
+<div class="detection">
+
+<div class="detect">
+
+<span class="detect-icon">
+🚗
+</span>
+
+<b class="car-count">
+38
+</b>
+
+<small>
+CARS
+</small>
+
+</div>
+
+
+<div class="detect">
+
+<span class="detect-icon">
+🏍️
+</span>
+
+<b class="bike-count">
+61
+</b>
+
+<small>
+BIKES
+</small>
+
+</div>
+
+
+<div class="detect">
+
+<span class="detect-icon">
+🚌
+</span>
+
+<b>
+7
+</b>
+
+<small>
+BUSES
+</small>
+
+</div>
+
+
+<div class="detect">
+
+<span class="detect-icon">
+🛺
+</span>
+
+<b>
+18
+</b>
+
+<small>
+AUTOS
+</small>
+
+</div>
+
+</div>
+
+
+<div class="traffic">
+
+<span class="density">
+Traffic Density
+</span>
+
+<span class="high">
+HIGH
+</span>
+
+</div>
+
+
+<div class="ai-status">
+
+🤖 <strong>AI:</strong>
+
+Peak-hour congestion detected.
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- ==================================================
+     CAMERA 006
+================================================== -->
+
+<div
+class="camera-card"
+data-location="RBI Square"
+data-traffic="medium">
+
+
+<div class="camera-screen">
+
+<div class="building b1"></div>
+<div class="building b2"></div>
+<div class="building b3"></div>
+<div class="building b4"></div>
+
+<div class="road"></div>
+
+
+<div class="vehicle"></div>
+<div class="vehicle v2"></div>
+<div class="vehicle v3"></div>
+<div class="vehicle v4"></div>
+<div class="vehicle v5"></div>
+
+
+<div class="ai-box box1">
+CAR
+</div>
+
+<div class="ai-box box2">
+BIKE
+</div>
+
+
+<div class="scan"></div>
+
+
+<div class="camera-top">
+
+<span class="camera-id">
+CAM-006
+</span>
+
+<span class="live-badge">
+● REC / LIVE
+</span>
+
+</div>
+
+
+<div class="cctv-info">
+
+<span class="rec">
+● REC
+</span>
+
+<span>
+AI VISION
+</span>
+
+<span class="clock">
+--:--:--
+</span>
+
+</div>
+
+</div>
+
+
+
+<div class="camera-info">
+
+<div class="camera-name">
+
+<h3>
+RBI Square
+</h3>
+
+<span class="camera-online">
+● ONLINE
+</span>
+
+</div>
+
+<div class="location">
+Central Nagpur
+</div>
+
+
+<div class="detection">
+
+<div class="detect">
+
+<span class="detect-icon">
+🚗
+</span>
+
+<b class="car-count">
+27
+</b>
+
+<small>
+CARS
+</small>
+
+</div>
+
+
+<div class="detect">
+
+<span class="detect-icon">
+🏍️
+</span>
+
+<b class="bike-count">
+44
+</b>
+
+<small>
+BIKES
+</small>
+
+</div>
+
+
+<div class="detect">
+
+<span class="detect-icon">
+🚌
+</span>
+
+<b>
+4
+</b>
+
+<small>
+BUSES
+</small>
+
+</div>
+
+
+<div class="detect">
+
+<span class="detect-icon">
+🛺
+</span>
+
+<b>
+11
+</b>
+
+<small>
+AUTOS
+</small>
+
+</div>
+
+</div>
+
+
+<div class="traffic">
+
+<span class="density">
+Traffic Density
+</span>
+
+<span class="medium">
+MEDIUM
+</span>
+
+</div>
+
+
+<div class="ai-status">
+
+🤖 <strong>AI:</strong>
+
+Stable traffic conditions detected.
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<div class="no-results"
+id="noResults">
+
+🔍 No camera found for this location.
+
+</div>
+
+
+</div>
+
+
+<div class="prototype-note">
+
+⚠️ <b>Hackathon Prototype:</b>
+Camera feeds shown here are simulated for demonstration.
+The final system is designed to integrate authorized
+traffic-camera feeds and AI computer-vision detection.
+
+</div>
+
+
+</main>
+
+
+
+<script>
+
+/* =========================
+   LIVE CLOCK
+========================= */
+
+function updateClock(){
+
+    const now = new Date();
+
+    const time =
+        now.toLocaleTimeString(
+            "en-IN",
+            {
+                hour12:false
+            }
+        );
+
+    document
+    .querySelectorAll(".clock")
+    .forEach(clock => {
+
+        clock.innerText = time;
+
+    });
+
+}
+
+updateClock();
+
+setInterval(
+    updateClock,
+    1000
+);
+
+
+/* =========================
+   SEARCH CAMERA
+========================= */
+
+function searchCamera(){
+
+    const query =
+        document
+        .getElementById("cameraSearch")
+        .value
+        .toLowerCase()
+        .trim();
+
+    const cards =
+        document
+        .querySelectorAll(".camera-card");
+
+    let found = false;
+
+    cards.forEach(card => {
+
+        const location =
+            card
+            .dataset
+            .location
+            .toLowerCase();
+
+        if(
+            query === "" ||
+            location.includes(query)
+        ){
+
+            card.style.display =
+                "block";
+
+            found = true;
+
+        }else{
+
+            card.style.display =
+                "none";
+
+        }
+
+    });
+
+
+    document
+    .getElementById("noResults")
+    .style.display =
+        found ? "none" : "block";
+
+}
+
+
+/* ENTER KEY SEARCH */
+
+document
+.getElementById("cameraSearch")
+.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key === "Enter"){
+
+            searchCamera();
+
+        }
+
+    }
+);
+
+
+/* =========================
+   TRAFFIC FILTER
+========================= */
+
+function filterTraffic(){
+
+    const filter =
+        document
+        .getElementById("trafficFilter")
+        .value;
+
+    const cards =
+        document
+        .querySelectorAll(".camera-card");
+
+    let found = false;
+
+    cards.forEach(card => {
+
+        if(
+            filter === "all" ||
+            card.dataset.traffic === filter
+        ){
+
+            card.style.display =
+                "block";
+
+            found = true;
+
+        }else{
+
+            card.style.display =
+                "none";
+
+        }
+
+    });
+
+
+    document
+    .getElementById("noResults")
+    .style.display =
+        found ? "none" : "block";
+
+}
+
+
+/* =========================
+   SIMULATED AI COUNTS
+========================= */
+
+setInterval(function(){
+
+    document
+    .querySelectorAll(".car-count")
+    .forEach(element => {
+
+        let value =
+            parseInt(
+                element.innerText
+            );
+
+        value +=
+            Math.floor(
+                Math.random() * 5
+            ) - 2;
+
+        if(value < 0){
+            value = 0;
+        }
+
+        element.innerText =
+            value;
+
+    });
+
+
+    document
+    .querySelectorAll(".bike-count")
+    .forEach(element => {
+
+        let value =
+            parseInt(
+                element.innerText
+            );
+
+        value +=
+            Math.floor(
+                Math.random() * 7
+            ) - 3;
+
+        if(value < 0){
+            value = 0;
+        }
+
+        element.innerText =
+            value;
+
+    });
+
+},3000);
+
+
+/* =========================
+   CAMERA ONLINE SIMULATION
+========================= */
+
+setInterval(function(){
+
+    const cameras =
+        document
+        .querySelectorAll(
+            ".camera-online"
+        );
+
+    cameras.forEach(camera => {
+
+        camera.innerText =
+            "● ONLINE";
+
+    });
+
+},5000);
+function showAcceptedState(emergency) {
+
+    const alertBox =
+        document.getElementById(
+            "emergencyAlert"
+        );
+
+
+    alertBox.style.display = "block";
+
+    alertBox.style.borderLeftColor =
+        "#00f59b";
+
+    alertBox.style.borderColor =
+        "rgba(0,245,155,.35)";
+
+    alertBox.style.animation =
+        "none";
+
+
+    const title =
+        alertBox.querySelector(
+            ".alert-title"
+        );
+
+    title.innerText =
+        "✓ EMERGENCY PRIORITY ACCEPTED";
+
+    title.style.color =
+        "#00f59b";
+
+
+    const badge =
+        alertBox.querySelector(
+            ".new-badge"
+        );
+
+    badge.innerText =
+        "ACCEPTED";
+
+    badge.style.background =
+        "#008f68";
+
+
+    const button =
+        alertBox.querySelector(
+            ".accept-btn"
+        );
+
+    button.innerText =
+        "✓ PRIORITY ACTIVE";
+
+    button.disabled =
+        true;
+
+    button.style.background =
+        "#087f5b";
+
+
+    const recommendation =
+        alertBox.querySelector(
+            ".ai-recommendation"
+        );
+
+
+    recommendation.innerHTML = `
+
+        🟢 <b>Emergency Corridor Activated</b>
+
+        <br><br>
+
+        Route:
+
+        <b>
+            ${emergency.from}
+            →
+            ${emergency.to}
+        </b>
+
+        <br><br>
+
+        ✅ Public user has been notified.
+
+        <br>
+
+        🚦 Traffic priority coordination is active.
+
+        <br>
+
+        📡 Junction monitoring enabled.
+
+    `;
+
+}
+
+</script>
+
+
+    <script src="JS/app.js"></script>
+
+</body>
+
+</html>

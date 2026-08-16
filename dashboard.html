@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Nagpur AI Traffic | Command Center</title>
+
+    <link rel="stylesheet"
+          href="CSS/dashboard.css">
+</head>
+
+
+<body>
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar">
+
+        <!-- BRAND -->
+
+        <div class="sidebar-brand">
+
+            <div class="traffic-logo">
+
+                <span class="red"></span>
+                <span class="yellow"></span>
+                <span class="green"></span>
+
+            </div>
+
+            <div>
+
+                <h2>NAGPUR <span>AI</span></h2>
+
+                <p>TRAFFIC CONTROL</p>
+
+            </div>
+
+        </div>
+
+
+        <!-- SYSTEM STATUS -->
+
+        <div class="sidebar-status">
+
+            <span class="online-dot"></span>
+
+            <div>
+
+                <strong>System Online</strong>
+
+                <small>All services operational</small>
+
+            </div>
+
+        </div>
+
+
+        <!-- NAVIGATION -->
+
+        <div class="nav-title">
+            MAIN MENU
+        </div>
+
+
+        <nav class="navigation">
+
+            <button class="nav-item active"
+                    data-section="dashboard">
+
+                <span class="nav-icon">⌂</span>
+
+                <span>Dashboard</span>
+
+            </button>
+
+
+            <button class="nav-item"
+                    data-section="map">
+
+                <span class="nav-icon">⌖</span>
+
+                <span>Live Map</span>
+
+            </button>
+
+
+            <button class="nav-item"
+                    data-section="cameras">
+
+                <span class="nav-icon">▣</span>
+
+                <span>Camera Intelligence</span>
+
+                <span class="nav-badge">42</span>
+
+            </button>
+
+
+            <button class="nav-item"
+                    data-section="ai">
+
+                <span class="nav-icon">◉</span>
+
+                <span>AI Detection</span>
+
+            </button>
+
+
+            <button class="nav-item emergency-nav"
+                    data-section="emergency">
+
+                <span class="nav-icon">✚</span>
+
+                <span>Emergency Mode</span>
+
+                <span class="alert-badge">3</span>
+
+            </button>
+
+
+            <div class="nav-title second-title">
+                ANALYTICS
+            </div>
+
+
+            <button class="nav-item"
+                    data-section="analytics">
+
+                <span class="nav-icon">▥</span>
+
+                <span>Traffic Analytics</span>
+
+            </button>
+
+
+            <button class="nav-item"
+                    data-section="alerts">
+
+                <span class="nav-icon">⚠</span>
+
+                <span>Alerts</span>
+
+                <span class="nav-badge orange">
+                    7
+                </span>
+
+            </button>
+
+
+            <button class="nav-item"
+                    data-section="reports">
+
+                <span class="nav-icon">▤</span>
+
+                <span>Reports</span>
+
+            </button>
+
+
+            <div class="nav-title second-title">
+                SYSTEM
+            </div>
+
+
+            <button class="nav-item"
+                    data-section="admin">
+
+                <span class="nav-icon">⚙</span>
+
+                <span>Admin Panel</span>
+
+            </button>
+
+        </nav>
+
+
+        <!-- USER -->
+
+        <div class="sidebar-user">
+
+            <div class="user-avatar">
+                Y
+            </div>
+
+            <div class="user-info">
+
+                <strong id="userName">
+                    Traffic Operator
+                </strong>
+
+                <small id="userRole">
+                    Control Room
+                </small>
+
+            </div>
+
+            <button id="logoutBtn"
+                    class="logout-btn"
+                    title="Logout">
+
+                ↪
+
+            </button>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+             TOP BAR
+        ================================================== -->
+
+        <header class="topbar">
+
+            <div class="page-heading">
+
+                <div class="mobile-menu">
+                    ☰
+                </div>
+
+                <div>
+
+                    <p class="breadcrumb">
+                        NAGPUR / CONTROL CENTER
+                    </p>
+
+                    <h1>
+                        Traffic Command Center
+                    </h1>
+
+                </div>
+
+            </div>
+
+
+            <div class="top-actions">
+
+
+                <!-- SEARCH -->
+
+                <div class="search-box">
+
+                    <span>⌕</span>
+
+                    <input
+                        type="text"
+                        id="globalSearch"
+                        placeholder="Search junction, camera..."
+                    >
+
+                </div>
+
+
+                <!-- LOCATION -->
+
+                <div class="location-info">
+
+                    <span>⌖</span>
+
+                    <div>
+
+                        <strong>Nagpur</strong>
+
+                        <small>Maharashtra, India</small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- NOTIFICATION -->
+
+                <button class="notification-btn"
+                        id="notificationBtn">
+
+                    🔔
+
+                    <span>7</span>
+
+                </button>
+
+
+                <!-- PROFILE -->
+
+                <div class="top-profile">
+
+                    <div class="profile-avatar">
+                        Y
+                    </div>
+
+                    <div>
+
+                        <strong id="topUserName">
+                            Operator
+                        </strong>
+
+                        <small>Traffic Control</small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =================================================
+             DASHBOARD CONTENT
+        ================================================== -->
+
+        <section class="dashboard-section"
+                 id="dashboardSection">
+
+
+            <!-- WELCOME -->
+
+            <div class="welcome-row">
+
+                <div>
+
+                    <span class="live-label">
+
+                        <span></span>
+
+                        LIVE MONITORING
+
+                    </span>
+
+                    <h2>
+                        Good Evening, <span id="welcomeName">
+                            Operator
+                        </span> 👋
+                    </h2>
+
+                    <p>
+                        Here's what's happening across
+                        Nagpur traffic network right now.
+                    </p>
+
+                </div>
+
+
+                <div class="current-time">
+
+                    <span>LOCAL TIME</span>
+
+                    <strong id="liveClock">
+                        00:00:00
+                    </strong>
+
+                    <small id="liveDate">
+                        Loading date...
+                    </small>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 STATISTICS
+            ================================================== -->
+
+            <div class="stats-grid">
+
+
+                <!-- VEHICLES -->
+
+                <div class="stat-card blue-card">
+
+                    <div class="stat-top">
+
+                        <div>
+
+                            <span class="stat-label">
+                                LIVE VEHICLES
+                            </span>
+
+                            <h3 id="vehicleCount">
+                                2,486
+                            </h3>
+
+                            <p class="positive">
+                                ↑ 8.4%
+                                <span>vs last hour</span>
+                            </p>
+
+                        </div>
+
+                        <div class="stat-icon">
+                            🚗
+                        </div>
+
+                    </div>
+
+                    <div class="stat-progress">
+
+                        <span style="width:72%"></span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- CAMERAS -->
+
+                <div class="stat-card purple-card">
+
+                    <div class="stat-top">
+
+                        <div>
+
+                            <span class="stat-label">
+                                ACTIVE CAMERAS
+                            </span>
+
+                            <h3>
+                                <span id="cameraCount">
+                                    42
+                                </span>
+                                <small>/ 48</small>
+                            </h3>
+
+                            <p class="positive">
+                                ● 87.5%
+                                <span>operational</span>
+                            </p>
+
+                        </div>
+
+                        <div class="stat-icon">
+                            📹
+                        </div>
+
+                    </div>
+
+                    <div class="stat-progress">
+
+                        <span style="width:87%"></span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- AI ALERTS -->
+
+                <div class="stat-card orange-card">
+
+                    <div class="stat-top">
+
+                        <div>
+
+                            <span class="stat-label">
+                                AI ALERTS
+                            </span>
+
+                            <h3 id="alertCount">
+                                07
+                            </h3>
+
+                            <p class="warning">
+                                ⚠ 3 high priority
+                            </p>
+
+                        </div>
+
+                        <div class="stat-icon">
+                            🤖
+                        </div>
+
+                    </div>
+
+                    <div class="stat-progress">
+
+                        <span style="width:38%"></span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- EMERGENCY -->
+
+                <div class="stat-card red-card">
+
+                    <div class="stat-top">
+
+                        <div>
+
+                            <span class="stat-label">
+                                EMERGENCY EVENTS
+                            </span>
+
+                            <h3 id="emergencyCount">
+                                03
+                            </h3>
+
+                            <p class="danger">
+                                🚨 1 active now
+                            </p>
+
+                        </div>
+
+                        <div class="stat-icon">
+                            🚑
+                        </div>
+
+                    </div>
+
+                    <div class="stat-progress">
+
+                        <span style="width:25%"></span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 MAIN GRID
+            ================================================== -->
+
+            <div class="main-grid">
+
+
+                <!-- =================================================
+                     MAP
+                ================================================== -->
+
+                <div class="panel map-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <span class="panel-label">
+                                REAL-TIME
+                            </span>
+
+                            <h3>
+                                Nagpur Traffic Network
+                            </h3>
+
+                        </div>
+
+
+                        <div class="map-controls">
+
+                            <button class="map-control active">
+                                LIVE
+                            </button>
+
+                            <button class="map-control">
+                                SATELLITE
+                            </button>
+
+                            <button class="expand-map"
+                                    id="expandMap">
+                                ⛶
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- MAP AREA -->
+
+                    <div class="map-area"
+                         id="trafficMap">
+
+
+                        <!-- Map Background -->
+
+                        <div class="map-grid"></div>
+
+
+                        <!-- Roads -->
+
+                        <div class="road road-1"></div>
+
+                        <div class="road road-2"></div>
+
+                        <div class="road road-3"></div>
+
+                        <div class="road road-4"></div>
+
+                        <div class="road road-5"></div>
+
+
+                        <!-- JUNCTION MARKERS -->
+
+
+                        <button class="junction-marker green"
+                                style="left:45%;top:34%;"
+                                data-junction="Zero Mile">
+
+                            <span></span>
+
+                            <label>
+                                Zero Mile
+                            </label>
+
+                        </button>
+
+
+                        <button class="junction-marker yellow"
+                                style="left:57%;top:43%;"
+                                data-junction="Variety Square">
+
+                            <span></span>
+
+                            <label>
+                                Variety Square
+                            </label>
+
+                        </button>
+
+
+                        <button class="junction-marker red"
+                                style="left:65%;top:60%;"
+                                data-junction="Chhatrapati Square">
+
+                            <span></span>
+
+                            <label>
+                                Chhatrapati Square
+                            </label>
+
+                        </button>
+
+
+                        <button class="junction-marker red"
+                                style="left:33%;top:64%;"
+                                data-junction="Medical Square">
+
+                            <span></span>
+
+                            <label>
+                                Medical Square
+                            </label>
+
+                        </button>
+
+
+                        <button class="junction-marker green"
+                                style="left:25%;top:38%;"
+                                data-junction="RBI Square">
+
+                            <span></span>
+
+                            <label>
+                                RBI Square
+                            </label>
+
+                        </button>
+
+
+                        <button class="junction-marker yellow"
+                                style="left:74%;top:37%;"
+                                data-junction="Sakkardara">
+
+                            <span></span>
+
+                            <label>
+                                Sakkardara
+                            </label>
+
+                        </button>
+
+
+                        <button class="junction-marker green"
+                                style="left:49%;top:75%;"
+                                data-junction="Manewada">
+
+                            <span></span>
+
+                            <label>
+                                Manewada Chowk
+                            </label>
+
+                        </button>
+
+
+                        <!-- MAP LEGEND -->
+
+                        <div class="map-legend">
+
+                            <div>
+                                <span class="legend-dot green"></span>
+                                Low
+                            </div>
+
+                            <div>
+                                <span class="legend-dot yellow"></span>
+                                Moderate
+                            </div>
+
+                            <div>
+                                <span class="legend-dot red"></span>
+                                Heavy
+                            </div>
+
+                        </div>
+
+
+                        <!-- MAP CENTER -->
+
+                        <div class="map-center-label">
+
+                            <strong>
+                                NAGPUR
+                            </strong>
+
+                            <small>
+                                LIVE TRAFFIC NETWORK
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     LIVE ALERTS
+                ================================================== -->
+
+                <div class="panel alerts-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <span class="panel-label">
+                                ATTENTION
+                            </span>
+
+                            <h3>
+                                Live Alerts
+                            </h3>
+
+                        </div>
+
+                        <button class="view-all"
+                                id="viewAllAlerts">
+                            View All →
+                        </button>
+
+                    </div>
+
+
+                    <div class="alerts-list">
+
+
+                        <!-- ALERT 1 -->
+
+                        <div class="alert-item critical">
+
+                            <div class="alert-symbol">
+                                🚑
+                            </div>
+
+                            <div class="alert-content">
+
+                                <strong>
+                                    Emergency Vehicle
+                                </strong>
+
+                                <p>
+                                    Ambulance detected near
+                                    Chhatrapati Square
+                                </p>
+
+                                <small>
+                                    2 min ago
+                                </small>
+
+                            </div>
+
+                            <span class="priority">
+                                HIGH
+                            </span>
+
+                        </div>
+
+
+                        <!-- ALERT 2 -->
+
+                        <div class="alert-item warning-alert">
+
+                            <div class="alert-symbol">
+                                ⚠
+                            </div>
+
+                            <div class="alert-content">
+
+                                <strong>
+                                    Heavy Congestion
+                                </strong>
+
+                                <p>
+                                    Traffic density high at
+                                    Medical Square
+                                </p>
+
+                                <small>
+                                    5 min ago
+                                </small>
+
+                            </div>
+
+                            <span class="priority medium">
+                                MEDIUM
+                            </span>
+
+                        </div>
+
+
+                        <!-- ALERT 3 -->
+
+                        <div class="alert-item info-alert">
+
+                            <div class="alert-symbol">
+                                📹
+                            </div>
+
+                            <div class="alert-content">
+
+                                <strong>
+                                    Camera Update
+                                </strong>
+
+                                <p>
+                                    Camera NGP-CAM-018
+                                    is back online
+                                </p>
+
+                                <small>
+                                    8 min ago
+                                </small>
+
+                            </div>
+
+                            <span class="priority low">
+                                INFO
+                            </span>
+
+                        </div>
+
+
+                        <!-- ALERT 4 -->
+
+                        <div class="alert-item warning-alert">
+
+                            <div class="alert-symbol">
+                                🏍
+                            </div>
+
+                            <div class="alert-content">
+
+                                <strong>
+                                    Traffic Surge
+                                </strong>
+
+                                <p>
+                                    Vehicle density increased
+                                    at Sakkardara
+                                </p>
+
+                                <small>
+                                    11 min ago
+                                </small>
+
+                            </div>
+
+                            <span class="priority medium">
+                                MEDIUM
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 SECOND ROW
+            ================================================== -->
+
+            <div class="bottom-grid">
+
+
+                <!-- CAMERA STATUS -->
+
+                <div class="panel camera-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <span class="panel-label">
+                                SURVEILLANCE
+                            </span>
+
+                            <h3>
+                                Camera Network
+                            </h3>
+
+                        </div>
+
+                        <button class="view-all">
+                            42 Active →
+                        </button>
+
+                    </div>
+
+
+                    <div class="camera-grid">
+
+
+                        <div class="camera-card">
+
+                            <div class="camera-preview">
+
+                                <span class="camera-live">
+                                    ● LIVE
+                                </span>
+
+                                <div class="camera-placeholder">
+                                    📹
+                                </div>
+
+                            </div>
+
+                            <div class="camera-info">
+
+                                <strong>
+                                    CAM-001
+                                </strong>
+
+                                <span>
+                                    Zero Mile
+                                </span>
+
+                            </div>
+
+                            <div class="camera-status">
+                                <span></span>
+                                Online
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="camera-card">
+
+                            <div class="camera-preview">
+
+                                <span class="camera-live">
+                                    ● LIVE
+                                </span>
+
+                                <div class="camera-placeholder">
+                                    📹
+                                </div>
+
+                            </div>
+
+                            <div class="camera-info">
+
+                                <strong>
+                                    CAM-018
+                                </strong>
+
+                                <span>
+                                    Chhatrapati Square
+                                </span>
+
+                            </div>
+
+                            <div class="camera-status">
+                                <span></span>
+                                Online
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="camera-card">
+
+                            <div class="camera-preview">
+
+                                <span class="camera-live">
+                                    ● LIVE
+                                </span>
+
+                                <div class="camera-placeholder">
+                                    📹
+                                </div>
+
+                            </div>
+
+                            <div class="camera-info">
+
+                                <strong>
+                                    CAM-027
+                                </strong>
+
+                                <span>
+                                    Medical Square
+                                </span>
+
+                            </div>
+
+                            <div class="camera-status warning-camera">
+                                <span></span>
+                                High Traffic
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- AI STATUS -->
+
+                <div class="panel ai-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <span class="panel-label">
+                                INTELLIGENCE
+                            </span>
+
+                            <h3>
+                                AI Engine
+                            </h3>
+
+                        </div>
+
+                        <span class="ai-active">
+                            ● ACTIVE
+                        </span>
+
+                    </div>
+
+
+                    <div class="ai-engine">
+
+
+                        <div class="ai-circle">
+
+                            <div class="ai-inner">
+
+                                <span>
+                                    AI
+                                </span>
+
+                                <small>
+                                    ENGINE
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="ai-stats">
+
+                            <div>
+
+                                <span>
+                                    VEHICLES DETECTED
+                                </span>
+
+                                <strong>
+                                    2,486
+                                </strong>
+
+                            </div>
+
+
+                            <div>
+
+                                <span>
+                                    DENSITY ACCURACY
+                                </span>
+
+                                <strong>
+                                    94.7%
+                                </strong>
+
+                            </div>
+
+
+                            <div>
+
+                                <span>
+                                    PROCESSING
+                                </span>
+
+                                <strong class="green-text">
+                                    28 FPS
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <button class="ai-action"
+                            id="aiTestBtn">
+
+                        🤖 Run AI Detection Test
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 EMERGENCY SECTION
+            ================================================== -->
+
+            <div class="panel emergency-panel">
+
+                <div class="emergency-left">
+
+                    <div class="emergency-icon">
+                        🚑
+                    </div>
+
+                    <div>
+
+                        <span class="panel-label">
+                            PRIORITY SYSTEM
+                        </span>
+
+                        <h3>
+                            Emergency Vehicle
+                            Priority
+                        </h3>
+
+                        <p>
+                            AI automatically detects and
+                            prioritizes emergency vehicles.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="emergency-status">
+
+                    <span class="pulse"></span>
+
+                    <div>
+
+                        <strong>
+                            1 Active Emergency
+                        </strong>
+
+                        <small>
+                            Chhatrapati Square →
+                            Medical Square
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <button class="emergency-btn"
+                        id="emergencyBtn">
+
+                    🚨 OPEN EMERGENCY MODE
+
+                </button>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             FOOTER
+        ================================================== -->
+
+        <footer class="dashboard-footer">
+
+            <div>
+
+                <strong>
+                    NAGPUR AI TRAFFIC
+                </strong>
+
+                <span>
+                    Intelligent Traffic Management System
+                </span>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    System Status:
+                </span>
+
+                <strong class="footer-online">
+                    ● ONLINE
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Last Sync:
+                </span>
+
+                <strong id="lastSync">
+                    Just now
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    © 2026
+                </span>
+
+            </div>
+
+        </footer>
+
+    </main>
+
+
+    <!-- =====================================================
+         ALERT MODAL
+    ====================================================== -->
+
+    <div class="modal-overlay"
+         id="alertModal">
+
+        <div class="modal-box">
+
+            <button class="modal-close"
+                    id="closeModal">
+                ×
+            </button>
+
+            <div class="modal-icon">
+                🚨
+            </div>
+
+            <h2>
+                Emergency Priority
+            </h2>
+
+            <p>
+                Ambulance detected at
+                <strong>Chhatrapati Square</strong>.
+            </p>
+
+            <div class="emergency-route">
+
+                <div>
+                    <span>START</span>
+                    <strong>Chhatrapati Square</strong>
+                </div>
+
+                <div class="route-arrow">
+                    →
+                </div>
+
+                <div>
+                    <span>DESTINATION</span>
+                    <strong>Medical Square</strong>
+                </div>
+
+            </div>
+
+            <div class="modal-status">
+
+                <span class="pulse"></span>
+
+                AI Priority Corridor Active
+
+            </div>
+
+            <button class="modal-action"
+                    id="closeEmergency">
+
+                ACKNOWLEDGE ALERT
+
+            </button>
+
+        </div>
+
+    </div>
+<div class="map-area" id="nagpurMap">
+
+    <div class="map-grid"></div>
+
+    <div class="road road-1"></div>
+    <div class="road road-2"></div>
+    <div class="road road-3"></div>
+    <div class="road road-4"></div>
+    <div class="road road-5"></div>
+
+    <div class="map-center-label">
+        <strong>NAGPUR</strong>
+        <small>AI TRAFFIC CONTROL NETWORK</small>
+    </div>
+
+    <div class="map-legend">
+        <div>
+            <span class="legend-dot green"></span>
+            Low
+        </div>
+
+        <div>
+            <span class="legend-dot yellow"></span>
+            Moderate
+        </div>
+
+        <div>
+            <span class="legend-dot red"></span>
+            High
+        </div>
+    </div>
+
+</div>
+
+    <!-- JAVASCRIPT -->
+
+    <script src="JS/dashboard.js"></script>
+
+
+    <script src="JS/app.js"></script>
+
+</body>
+
+</html>
